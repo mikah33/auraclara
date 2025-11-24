@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Results from Real Women | Aura Clara Testimonials</title>
+    <meta name="description" content="See real before-and-after results from our customers. Read reviews and watch video testimonials from women who transformed their skin with Aura Clara skincare.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon-rounded.png">
+    <meta name="theme-color" content="#E6D5F5">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Testimonials Page Specific Styles */
+        .testimonials-hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .testimonials-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .testimonials-hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .before-after-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--white);
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .before-after-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .before-after-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .before-after-images {
+            position: relative;
+            height: 300px;
+            background: var(--lavender-50);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .before-after-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-label {
+            position: absolute;
+            top: 0.5rem;
+            padding: 0.375rem 0.75rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: var(--radius-sm);
+        }
+
+        .image-label.before {
+            left: 0.5rem;
+        }
+
+        .image-label.after {
+            right: 0.5rem;
+        }
+
+        .before-after-info {
+            padding: 1.5rem;
+        }
+
+        .testimonial-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .customer-name {
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .testimonial-stars {
+            color: #F59E0B;
+            font-size: 0.875rem;
+        }
+
+        .testimonial-text {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--gray-600);
+            font-style: italic;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-used {
+            font-size: 0.8125rem;
+            color: var(--lavender-600);
+            font-weight: 600;
+        }
+
+        .written-testimonials-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--cream);
+        }
+
+        .testimonials-filter {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.625rem 1.25rem;
+            background: var(--white);
+            border: 2px solid var(--lavender-200);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--lavender-400);
+            background: var(--lavender-50);
+        }
+
+        .filter-btn.active {
+            background: var(--lavender-500);
+            border-color: var(--lavender-500);
+            color: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .video-testimonials-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--white);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: var(--lavender-50);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 1rem;
+        }
+
+        .cta-section {
+            padding: var(--spacing-xl) 0;
+            background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .btn-cta {
+            padding: 1rem 2.5rem;
+            background: var(--white);
+            color: var(--lavender-600);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-cta:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 768px) {
+            .before-after-grid,
+            .testimonials-grid,
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo" aria-label="Aura Clara Home">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="logo-img">
+                </a>
+                <div class="nav-links">
+                    <a href="../products/index.html">Shop</a>
+                    <a href="../index.html#shop">Best Sellers</a>
+                    <a href="newsletter.html">Newsletter</a>
+                    <a href="#">Account</a>
+                </div>
+                <div class="nav-icons">
+                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="16.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="testimonials-hero">
+        <div class="container">
+            <h1>Real Results from Real Women</h1>
+            <p>See the transformations that made our customers fall in love with their skin again</p>
+        </div>
+    </section>
+
+    <!-- Before & After Section -->
+    <section class="before-after-section">
+        <div class="container">
+            <h2 class="section-title">Before & After Transformations</h2>
+            <div class="before-after-grid">
+                <!-- Transformation 1 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <img src="../assets/images/placeholder-before.jpg" alt="Before" onerror="this.src='https://via.placeholder.com/280x300/E6D5F5/7D53B2?text=Before'" style="filter: brightness(0.95);">
+                        <img src="../assets/images/placeholder-after.jpg" alt="After" onerror="this.src='https://via.placeholder.com/280x300/B788E8/FFFFFF?text=After'">
+                        <span class="image-label before">Before</span>
+                        <span class="image-label after">After</span>
+                    </div>
+                    <div class="before-after-info">
+                        <div class="testimonial-meta">
+                            <span class="customer-name">Sarah M.</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                        <p class="testimonial-text">"The Clarity Patches completely cleared my hormonal breakouts in just 2 weeks. I can't believe the difference!"</p>
+                        <span class="product-used">Clarity Patches</span>
+                    </div>
+                </div>
+
+                <!-- Transformation 2 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <img src="../assets/images/placeholder-before.jpg" alt="Before" onerror="this.src='https://via.placeholder.com/280x300/E6D5F5/7D53B2?text=Before'" style="filter: brightness(0.95);">
+                        <img src="../assets/images/placeholder-after.jpg" alt="After" onerror="this.src='https://via.placeholder.com/280x300/B788E8/FFFFFF?text=After'">
+                        <span class="image-label before">Before</span>
+                        <span class="image-label after">After</span>
+                    </div>
+                    <div class="before-after-info">
+                        <div class="testimonial-meta">
+                            <span class="customer-name">Jennifer K.</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                        <p class="testimonial-text">"My jawline is so much more defined after using the Face Sculpting Tool. People keep asking if I lost weight!"</p>
+                        <span class="product-used">Face Sculpting Tool</span>
+                    </div>
+                </div>
+
+                <!-- Transformation 3 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <img src="../assets/images/placeholder-before.jpg" alt="Before" onerror="this.src='https://via.placeholder.com/280x300/E6D5F5/7D53B2?text=Before'" style="filter: brightness(0.95);">
+                        <img src="../assets/images/placeholder-after.jpg" alt="After" onerror="this.src='https://via.placeholder.com/280x300/B788E8/FFFFFF?text=After'">
+                        <span class="image-label before">Before</span>
+                        <span class="image-label after">After</span>
+                    </div>
+                    <div class="before-after-info">
+                        <div class="testimonial-meta">
+                            <span class="customer-name">Amanda T.</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                        <p class="testimonial-text">"The Bio-Collagen Mask made my skin so plump and hydrated. Fine lines? What fine lines?"</p>
+                        <span class="product-used">Bio-Collagen Mask</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Written Testimonials Section -->
+    <section class="written-testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+
+            <!-- Filter Buttons -->
+            <div class="testimonials-filter">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="clarity-patches">Clarity Patches</button>
+                <button class="filter-btn" data-filter="face-tool">Face Tool</button>
+                <button class="filter-btn" data-filter="masks">Masks</button>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card" data-category="clarity-patches">
+                    <div class="testimonial-meta">
+                        <span class="customer-name">Rachel M.</span>
+                        <span class="testimonial-stars">★★★★★</span>
+                    </div>
+                    <p class="testimonial-text">"I've tried every pimple patch out there and these are by far the best. They actually pull out the gunk overnight! No more picking and scarring."</p>
+                    <span class="product-used">Clarity Patches</span>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card" data-category="face-tool">
+                    <div class="testimonial-meta">
+                        <span class="customer-name">Lisa P.</span>
+                        <span class="testimonial-stars">★★★★★</span>
+                    </div>
+                    <p class="testimonial-text">"The red light therapy is amazing! My fine lines around my eyes are noticeably reduced after just 3 weeks of daily use."</p>
+                    <span class="product-used">Face Sculpting Tool</span>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card" data-category="masks">
+                    <div class="testimonial-meta">
+                        <span class="customer-name">Michelle L.</span>
+                        <span class="testimonial-stars">★★★★★</span>
+                    </div>
+                    <p class="testimonial-text">"I wear the V-Line Mask before every important event. The contouring effect is incredible and lasts for hours!"</p>
+                    <span class="product-used">V-Line Lifting Mask</span>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card" data-category="clarity-patches">
+                    <div class="testimonial-meta">
+                        <span class="customer-name">Emily S.</span>
+                        <span class="testimonial-stars">★★★★★</span>
+                    </div>
+                    <p class="testimonial-text">"Game changer for my hormonal acne. I keep these in my purse at all times. Lifesaver before a big meeting or date!"</p>
+                    <span class="product-used">Clarity Patches</span>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card" data-category="masks">
+                    <div class="testimonial-meta">
+                        <span class="customer-name">Sarah D.</span>
+                        <span class="testimonial-stars">★★★★★</span>
+                    </div>
+                    <p class="testimonial-text">"My skin drinks up the Bio-Collagen Mask! I look well-rested even after sleepless nights. It's my secret weapon."</p>
+                    <span class="product-used">Bio-Collagen Mask</span>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial-card" data-category="face-tool">
+                    <div class="testimonial-meta">
+                        <span class="customer-name">Jessica W.</span>
+                        <span class="testimonial-stars">★★★★★</span>
+                    </div>
+                    <p class="testimonial-text">"Worth every penny! I've been using it daily for a month and my skin tone is more even and my fine lines are fading."</p>
+                    <span class="product-used">Face Sculpting Tool</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Testimonials Section -->
+    <section class="video-testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Watch Our Customers' Stories</h2>
+            <div class="video-grid">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <!-- Replace with actual YouTube/Vimeo embeds -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Customer Testimonial 1" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="testimonial-meta">
+                            <span class="customer-name">Maria G.</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                        <p class="testimonial-text">"See how Aura Clara helped me finally get clear skin after 15 years of acne struggles."</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Customer Testimonial 2" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="testimonial-meta">
+                            <span class="customer-name">Angela R.</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                        <p class="testimonial-text">"My 3-month transformation using the Face Sculpting Tool - the results speak for themselves!"</p>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Customer Testimonial 3" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="testimonial-meta">
+                            <span class="customer-name">Nicole T.</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                        <p class="testimonial-text">"Why I switched to Aura Clara and never looked back. Honest review of all my favorite products."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Skin?</h2>
+            <p>Join thousands of women who've discovered their best skin with Aura Clara</p>
+            <a href="../products/index.html" class="btn-cta">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="footer-logo">
+                    <p class="footer-tagline">Illuminate Your Beauty</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <a href="../products/clarity-patches.html">Clarity Patches</a>
+                    <a href="../products/neck-face-sculpting-tool.html">Face Tool</a>
+                    <a href="../products/index.html">All Products</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <a href="../index.html#about">About Us</a>
+                    <a href="ingredients.html">Ingredients</a>
+                    <a href="sustainability.html">Sustainability</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Contact</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Returns</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aura Clara. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                testimonialCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

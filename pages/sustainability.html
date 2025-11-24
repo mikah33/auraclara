@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability | Beauty That Doesn't Cost the Earth | Aura Clara</title>
+    <meta name="description" content="Discover Aura Clara's commitment to sustainability. Carbon-neutral shipping, recyclable packaging, cruelty-free products, and woman-owned business values.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon-rounded.png">
+    <meta name="theme-color" content="#E6D5F5">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Sustainability Page Specific Styles */
+        .sustainability-hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .sustainability-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .sustainability-hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .impact-metrics-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--white);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .metric-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-number {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        .commitment-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--cream);
+        }
+
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .commitment-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .commitment-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .commitment-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.75rem;
+        }
+
+        .commitment-description {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            color: var(--gray-600);
+        }
+
+        .packaging-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--white);
+        }
+
+        .packaging-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .packaging-visual {
+            background: var(--lavender-50);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .packaging-icon {
+            font-size: 8rem;
+        }
+
+        .packaging-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .packaging-features li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--lavender-100);
+        }
+
+        .packaging-features li:last-child {
+            border-bottom: none;
+        }
+
+        .packaging-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .certifications-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--lavender-50);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cert-badge {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .cert-badge:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .cert-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-description {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .woman-owned-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--white);
+        }
+
+        .woman-owned-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .woman-owned-story {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+        }
+
+        .founder-quote {
+            background: var(--lavender-50);
+            border-left: 4px solid var(--lavender-500);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin: 2rem 0;
+        }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--lavender-600);
+        }
+
+        .cta-section {
+            padding: var(--spacing-xl) 0;
+            background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .btn-cta {
+            padding: 1rem 2.5rem;
+            background: var(--white);
+            color: var(--lavender-600);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-cta:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid,
+            .commitment-grid,
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .packaging-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .packaging-visual {
+                min-height: 200px;
+            }
+
+            .packaging-icon {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo" aria-label="Aura Clara Home">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="logo-img">
+                </a>
+                <div class="nav-links">
+                    <a href="../products/index.html">Shop</a>
+                    <a href="../index.html#shop">Best Sellers</a>
+                    <a href="newsletter.html">Newsletter</a>
+                    <a href="#">Account</a>
+                </div>
+                <div class="nav-icons">
+                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="16.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="sustainability-hero">
+        <div class="container">
+            <h1>Beauty That Doesn't Cost the Earth</h1>
+            <p>We believe skincare should make you feel good inside and out. Discover our commitment to sustainability and ethical beauty.</p>
+        </div>
+    </section>
+
+    <!-- Impact Metrics -->
+    <section class="impact-metrics-section">
+        <div class="container">
+            <h2 class="section-title">Our Environmental Impact</h2>
+            <p class="section-description">Real numbers, real commitment</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">📦</div>
+                    <div class="metric-number">50K+</div>
+                    <div class="metric-label">Plastic Patches Saved from Landfills</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">🌱</div>
+                    <div class="metric-number">100%</div>
+                    <div class="metric-label">Carbon-Neutral Shipping</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">♻️</div>
+                    <div class="metric-number">95%</div>
+                    <div class="metric-label">Recyclable Packaging</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">🌊</div>
+                    <div class="metric-number">10K</div>
+                    <div class="metric-label">Gallons of Water Saved</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Commitments -->
+    <section class="commitment-section">
+        <div class="container">
+            <h2 class="section-title">Our Commitments</h2>
+
+            <div class="commitment-grid">
+                <div class="commitment-card">
+                    <div class="commitment-icon">🚚</div>
+                    <h3 class="commitment-title">Carbon-Neutral Shipping</h3>
+                    <p class="commitment-description">Every order is shipped carbon-neutral through our partnership with verified offset programs. We calculate and offset 100% of shipping emissions.</p>
+                </div>
+
+                <div class="commitment-card">
+                    <div class="commitment-icon">📦</div>
+                    <h3 class="commitment-title">Recyclable Packaging</h3>
+                    <p class="commitment-description">95% of our packaging is recyclable. We use FSC-certified paper, recyclable cardboard, and minimal plastic in our product packaging.</p>
+                </div>
+
+                <div class="commitment-card">
+                    <div class="commitment-icon">🐰</div>
+                    <h3 class="commitment-title">Cruelty-Free Always</h3>
+                    <p class="commitment-description">We never test on animals, period. All our products are certified cruelty-free and we partner only with cruelty-free suppliers.</p>
+                </div>
+
+                <div class="commitment-card">
+                    <div class="commitment-icon">🌱</div>
+                    <h3 class="commitment-title">100% Vegan</h3>
+                    <p class="commitment-description">No animal-derived ingredients, ever. Our entire product line is vegan and free from animal byproducts.</p>
+                </div>
+
+                <div class="commitment-card">
+                    <div class="commitment-icon">💧</div>
+                    <h3 class="commitment-title">Water Conservation</h3>
+                    <p class="commitment-description">Our manufacturing partners use water-saving technologies and we prioritize waterless formulas where possible.</p>
+                </div>
+
+                <div class="commitment-card">
+                    <div class="commitment-icon">♻️</div>
+                    <h3 class="commitment-title">Sustainable Sourcing</h3>
+                    <p class="commitment-description">We source ingredients ethically and sustainably, working with suppliers who share our environmental values.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packaging Details -->
+    <section class="packaging-section">
+        <div class="container">
+            <h2 class="section-title">Our Packaging Philosophy</h2>
+
+            <div class="packaging-grid">
+                <div class="packaging-visual">
+                    <div class="packaging-icon">📦</div>
+                </div>
+
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--black);">Less is More</h3>
+                    <p style="font-size: 1rem; line-height: 1.7; color: var(--gray-600); margin-bottom: 1.5rem;">We design our packaging with minimal waste in mind. Every element serves a purpose, and nothing goes to waste.</p>
+
+                    <ul class="packaging-features">
+                        <li><strong>FSC-Certified Paper</strong> - All cardboard comes from responsibly managed forests</li>
+                        <li><strong>Recyclable Materials</strong> - 95% of our packaging can be recycled curbside</li>
+                        <li><strong>Minimal Plastic</strong> - We use plastic only where necessary for product safety</li>
+                        <li><strong>Soy-Based Inks</strong> - Our printed materials use eco-friendly, biodegradable inks</li>
+                        <li><strong>Reusable Containers</strong> - Some products come in containers designed for reuse</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="certifications-section">
+        <div class="container">
+            <h2 class="section-title">Certified & Verified</h2>
+            <p class="section-description">Third-party verified for transparency</p>
+
+            <div class="cert-grid">
+                <div class="cert-badge">
+                    <div class="cert-icon">🌱</div>
+                    <h3 class="cert-name">100% Vegan</h3>
+                    <p class="cert-description">No animal ingredients or byproducts</p>
+                </div>
+
+                <div class="cert-badge">
+                    <div class="cert-icon">🐰</div>
+                    <h3 class="cert-name">Cruelty-Free</h3>
+                    <p class="cert-description">Never tested on animals</p>
+                </div>
+
+                <div class="cert-badge">
+                    <div class="cert-icon">♻️</div>
+                    <h3 class="cert-name">Eco-Friendly</h3>
+                    <p class="cert-description">Sustainable practices verified</p>
+                </div>
+
+                <div class="cert-badge">
+                    <div class="cert-icon">✨</div>
+                    <h3 class="cert-name">Clean Beauty</h3>
+                    <p class="cert-description">Free from harmful chemicals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Woman-Owned Story -->
+    <section class="woman-owned-section">
+        <div class="container">
+            <h2 class="section-title">Woman-Owned & Proud</h2>
+
+            <div class="woman-owned-content">
+                <p class="woman-owned-story">
+                    Aura Clara was founded by women who've been through it all—hormonal breakouts, stress acne, sleepless nights with newborns. We understand the struggle because we've lived it. That's why we're committed to creating products that actually work, at prices that make sense, with values that matter.
+                </p>
+
+                <div class="founder-quote">
+                    <p class="quote-text">"As women, we're told to accept products that don't work, prices that don't make sense, and companies that don't care. We started Aura Clara to change that. Your skin deserves better. You deserve better."</p>
+                    <p class="quote-author">— The Aura Clara Founders</p>
+                </div>
+
+                <p class="woman-owned-story">
+                    We're proud to be a woman-owned business that puts customers first, planet second, and profits third. Every decision we make—from ingredient sourcing to packaging design—reflects our commitment to doing beauty differently.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Shop with Purpose</h2>
+            <p>Every purchase supports sustainable beauty and empowers women-owned businesses</p>
+            <a href="../products/index.html" class="btn-cta">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="footer-logo">
+                    <p class="footer-tagline">Illuminate Your Beauty</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <a href="../products/clarity-patches.html">Clarity Patches</a>
+                    <a href="../products/neck-face-sculpting-tool.html">Face Tool</a>
+                    <a href="../products/index.html">All Products</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <a href="../index.html#about">About Us</a>
+                    <a href="ingredients.html">Ingredients</a>
+                    <a href="testimonials.html">Testimonials</a>
+                    <a href="compare.html">Compare</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Contact</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Returns</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aura Clara. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

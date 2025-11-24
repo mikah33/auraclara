@@ -1,0 +1,189 @@
+/* ==========================================
+   AURA CLARA - Sustainability Badges Component
+   ========================================== */
+
+/* Sustainability Banner Section */
+.sustainability-banner {
+    background: linear-gradient(135deg, var(--lavender-50) 0%, var(--lavender-100) 100%);
+    padding: var(--spacing-lg) 0;
+    margin: var(--spacing-lg) 0;
+}
+
+.sustainability-badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-md);
+}
+
+.sustainability-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.sustainability-badge:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.badge-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.badge-text {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--lavender-600);
+    text-align: center;
+}
+
+.sustainability-link {
+    display: block;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--lavender-600);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sustainability-link:hover {
+    color: var(--lavender-500);
+}
+
+/* Section Header with Compare Link */
+.section-header-with-compare {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.compare-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--lavender-500);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+}
+
+.compare-link:hover {
+    background: var(--lavender-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.compare-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Product Page Sustainability Badges (Inline) */
+.product-sustainability-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) 0;
+}
+
+.product-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--lavender-50);
+    border: 1px solid var(--lavender-200);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--lavender-600);
+}
+
+.product-badge-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .sustainability-badges {
+        gap: var(--spacing-md);
+    }
+
+    .sustainability-badge {
+        min-width: 100px;
+        padding: var(--spacing-sm);
+    }
+
+    .badge-icon {
+        font-size: 1.5rem;
+    }
+
+    .badge-text {
+        font-size: 0.75rem;
+    }
+
+    .section-header-with-compare {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .compare-link {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sustainability-banner {
+        padding: var(--spacing-md) 0;
+    }
+
+    .sustainability-badges {
+        gap: var(--spacing-sm);
+    }
+
+    .sustainability-badge {
+        min-width: 80px;
+        padding: var(--spacing-xs);
+    }
+
+    .badge-icon {
+        font-size: 1.25rem;
+    }
+
+    .badge-text {
+        font-size: 0.7rem;
+    }
+
+    .product-sustainability-badges {
+        gap: 6px;
+    }
+
+    .product-badge {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+}

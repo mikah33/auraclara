@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Products | Find Your Perfect Match | Aura Clara</title>
+    <meta name="description" content="Compare up to 3 Aura Clara products side-by-side. See ingredients, benefits, pricing, and which product is right for your skin type.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon-rounded.png">
+    <meta name="theme-color" content="#E6D5F5">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Compare Page Specific Styles */
+        .compare-hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .compare-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .compare-hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .product-selector-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--white);
+        }
+
+        .selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+        }
+
+        .selector-slot {
+            background: var(--lavender-50);
+            border: 3px dashed var(--lavender-300);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .selector-slot.filled {
+            border-style: solid;
+            border-color: var(--lavender-500);
+            background: var(--white);
+        }
+
+        .selector-number {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--lavender-400);
+            margin-bottom: 1rem;
+        }
+
+        .product-dropdown {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 0.9375rem;
+            border: 2px solid var(--lavender-200);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .product-dropdown:hover {
+            border-color: var(--lavender-400);
+        }
+
+        .product-dropdown:focus {
+            outline: none;
+            border-color: var(--lavender-500);
+            box-shadow: 0 0 0 3px rgba(183, 136, 232, 0.1);
+        }
+
+        .selected-product-preview {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .selector-slot.filled .selected-product-preview {
+            display: flex;
+        }
+
+        .selector-slot.filled .selector-instructions {
+            display: none;
+        }
+
+        .preview-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 0.75rem;
+        }
+
+        .preview-name {
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.25rem;
+        }
+
+        .preview-price {
+            color: var(--lavender-600);
+            font-weight: 700;
+        }
+
+        .remove-product {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 28px;
+            height: 28px;
+            background: var(--white);
+            border: 2px solid var(--gray-300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--gray-600);
+            transition: all 0.2s ease;
+        }
+
+        .remove-product:hover {
+            background: #FEE;
+            border-color: #C33;
+            color: #C33;
+        }
+
+        .compare-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 1rem 3rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .compare-btn.active {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .compare-btn.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(155, 109, 217, 0.4);
+        }
+
+        .comparison-table-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--cream);
+            display: none;
+        }
+
+        .comparison-table-section.visible {
+            display: block;
+        }
+
+        .comparison-table {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 200px repeat(3, 1fr);
+            border-bottom: 1px solid var(--lavender-100);
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-header {
+            background: var(--lavender-500);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .table-cell {
+            padding: 1.25rem;
+            border-right: 1px solid var(--lavender-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .table-cell:last-child {
+            border-right: none;
+        }
+
+        .table-label {
+            font-weight: 600;
+            color: var(--black);
+            background: var(--lavender-50);
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .table-cell ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .table-cell ul li {
+            padding: 0.25rem 0;
+            font-size: 0.875rem;
+        }
+
+        .competitor-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--white);
+        }
+
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .competitor-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--lavender-100);
+        }
+
+        .competitor-vs {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        .brand-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .brand-name.aura {
+            color: var(--lavender-600);
+        }
+
+        .brand-name.competitor {
+            color: var(--gray-600);
+        }
+
+        .vs-icon {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--gray-400);
+        }
+
+        .comparison-points {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .comparison-points li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--lavender-100);
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .comparison-points li:last-child {
+            border-bottom: none;
+        }
+
+        .point-label {
+            text-align: center;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .point-value {
+            text-align: center;
+        }
+
+        .point-value.winner {
+            color: var(--lavender-600);
+            font-weight: 700;
+        }
+
+        .point-value.loser {
+            color: var(--gray-400);
+        }
+
+        .winner-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .selector-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-row {
+                grid-template-columns: 120px repeat(3, 1fr);
+                font-size: 0.8125rem;
+            }
+
+            .table-cell {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo" aria-label="Aura Clara Home">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="logo-img">
+                </a>
+                <div class="nav-links">
+                    <a href="../products/index.html">Shop</a>
+                    <a href="../index.html#shop">Best Sellers</a>
+                    <a href="newsletter.html">Newsletter</a>
+                    <a href="#">Account</a>
+                </div>
+                <div class="nav-icons">
+                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="16.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="compare-hero">
+        <div class="container">
+            <h1>Compare Products</h1>
+            <p>Not sure which product is right for you? Compare up to 3 products side-by-side to find your perfect match.</p>
+        </div>
+    </section>
+
+    <!-- Product Selector -->
+    <section class="product-selector-section">
+        <div class="container">
+            <h2 class="section-title">Select Products to Compare</h2>
+            <p class="section-description">Choose 2-3 products to see a detailed comparison</p>
+
+            <div class="selector-grid">
+                <!-- Slot 1 -->
+                <div class="selector-slot" data-slot="1">
+                    <span class="selector-number">1</span>
+                    <div class="selector-instructions">
+                        <select class="product-dropdown" data-slot="1">
+                            <option value="">Select a product...</option>
+                            <option value="clarity-patches" data-price="12.99" data-image="../assets/images/product-packaging.png">Clarity Patches - $12.99</option>
+                            <option value="face-tool" data-price="52.99" data-image="../assets/images/face-sculpting-tool-box.png">Face Sculpting Tool - $52.99</option>
+                            <option value="jawline-shaper" data-price="12.99" data-image="../assets/images/jawline-shaper.jpg">Jawline Shaper - $12.99</option>
+                            <option value="vline-mask" data-price="19.00" data-image="../assets/images/vline-mask-flat.jpg">V-Line Mask - $19.00</option>
+                            <option value="bio-collagen" data-price="24.99" data-image="../assets/images/bio-collagen-aesthetic.jpg">Bio-Collagen Mask - $24.99</option>
+                        </select>
+                    </div>
+                    <div class="selected-product-preview">
+                        <button class="remove-product">×</button>
+                        <img class="preview-image" src="" alt="">
+                        <div class="preview-name"></div>
+                        <div class="preview-price"></div>
+                    </div>
+                </div>
+
+                <!-- Slot 2 -->
+                <div class="selector-slot" data-slot="2">
+                    <span class="selector-number">2</span>
+                    <div class="selector-instructions">
+                        <select class="product-dropdown" data-slot="2">
+                            <option value="">Select a product...</option>
+                            <option value="clarity-patches" data-price="12.99" data-image="../assets/images/product-packaging.png">Clarity Patches - $12.99</option>
+                            <option value="face-tool" data-price="52.99" data-image="../assets/images/face-sculpting-tool-box.png">Face Sculpting Tool - $52.99</option>
+                            <option value="jawline-shaper" data-price="12.99" data-image="../assets/images/jawline-shaper.jpg">Jawline Shaper - $12.99</option>
+                            <option value="vline-mask" data-price="19.00" data-image="../assets/images/vline-mask-flat.jpg">V-Line Mask - $19.00</option>
+                            <option value="bio-collagen" data-price="24.99" data-image="../assets/images/bio-collagen-aesthetic.jpg">Bio-Collagen Mask - $24.99</option>
+                        </select>
+                    </div>
+                    <div class="selected-product-preview">
+                        <button class="remove-product">×</button>
+                        <img class="preview-image" src="" alt="">
+                        <div class="preview-name"></div>
+                        <div class="preview-price"></div>
+                    </div>
+                </div>
+
+                <!-- Slot 3 -->
+                <div class="selector-slot" data-slot="3">
+                    <span class="selector-number">3</span>
+                    <div class="selector-instructions">
+                        <select class="product-dropdown" data-slot="3">
+                            <option value="">Select a product...</option>
+                            <option value="clarity-patches" data-price="12.99" data-image="../assets/images/product-packaging.png">Clarity Patches - $12.99</option>
+                            <option value="face-tool" data-price="52.99" data-image="../assets/images/face-sculpting-tool-box.png">Face Sculpting Tool - $52.99</option>
+                            <option value="jawline-shaper" data-price="12.99" data-image="../assets/images/jawline-shaper.jpg">Jawline Shaper - $12.99</option>
+                            <option value="vline-mask" data-price="19.00" data-image="../assets/images/vline-mask-flat.jpg">V-Line Mask - $19.00</option>
+                            <option value="bio-collagen" data-price="24.99" data-image="../assets/images/bio-collagen-aesthetic.jpg">Bio-Collagen Mask - $24.99</option>
+                        </select>
+                    </div>
+                    <div class="selected-product-preview">
+                        <button class="remove-product">×</button>
+                        <img class="preview-image" src="" alt="">
+                        <div class="preview-name"></div>
+                        <div class="preview-price"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="compare-btn" id="compareBtn">Compare Products</button>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-table-section" id="comparisonTable">
+        <div class="container">
+            <h2 class="section-title">Side-by-Side Comparison</h2>
+
+            <div class="comparison-table">
+                <div class="table-row table-header">
+                    <div class="table-cell table-label">Feature</div>
+                    <div class="table-cell" id="header1">Product 1</div>
+                    <div class="table-cell" id="header2">Product 2</div>
+                    <div class="table-cell" id="header3">Product 3</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="table-cell table-label">Price</div>
+                    <div class="table-cell" id="price1">-</div>
+                    <div class="table-cell" id="price2">-</div>
+                    <div class="table-cell" id="price3">-</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="table-cell table-label">Best For</div>
+                    <div class="table-cell" id="bestfor1">-</div>
+                    <div class="table-cell" id="bestfor2">-</div>
+                    <div class="table-cell" id="bestfor3">-</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="table-cell table-label">Skin Types</div>
+                    <div class="table-cell" id="skintypes1">-</div>
+                    <div class="table-cell" id="skintypes2">-</div>
+                    <div class="table-cell" id="skintypes3">-</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="table-cell table-label">Key Ingredients</div>
+                    <div class="table-cell" id="ingredients1">-</div>
+                    <div class="table-cell" id="ingredients2">-</div>
+                    <div class="table-cell" id="ingredients3">-</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="table-cell table-label">Results Timeline</div>
+                    <div class="table-cell" id="timeline1">-</div>
+                    <div class="table-cell" id="timeline2">-</div>
+                    <div class="table-cell" id="timeline3">-</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="table-cell table-label">Usage Frequency</div>
+                    <div class="table-cell" id="frequency1">-</div>
+                    <div class="table-cell" id="frequency2">-</div>
+                    <div class="table-cell" id="frequency3">-</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitor Comparison -->
+    <section class="competitor-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Aura Clara?</h2>
+            <p class="section-description">See how we stack up against the competition</p>
+
+            <div class="competitor-grid">
+                <!-- Comparison 1 -->
+                <div class="competitor-card">
+                    <div class="brand-comparison">
+                        <div class="brand-name aura">Aura Clara</div>
+                        <div class="vs-icon">VS</div>
+                        <div class="brand-name competitor">Brand X</div>
+                    </div>
+                    <ul class="comparison-points">
+                        <li>
+                            <div class="point-value winner">$12.99</div>
+                            <div class="point-label">Price</div>
+                            <div class="point-value loser">$18.99</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">★★★★★ (4.9)</div>
+                            <div class="point-label">Rating</div>
+                            <div class="point-value loser">★★★★☆ (4.2)</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">Medical-grade</div>
+                            <div class="point-label">Quality</div>
+                            <div class="point-value loser">Standard</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">Yes</div>
+                            <div class="point-label">Cruelty-Free</div>
+                            <div class="point-value loser">No</div>
+                        </li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <span class="winner-badge">Best Value</span>
+                    </div>
+                </div>
+
+                <!-- Comparison 2 -->
+                <div class="competitor-card">
+                    <div class="brand-comparison">
+                        <div class="brand-name aura">Aura Clara</div>
+                        <div class="vs-icon">VS</div>
+                        <div class="brand-name competitor">Brand Y</div>
+                    </div>
+                    <ul class="comparison-points">
+                        <li>
+                            <div class="point-value winner">100%</div>
+                            <div class="point-label">Vegan</div>
+                            <div class="point-value loser">60%</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">630nm</div>
+                            <div class="point-label">Light Tech</div>
+                            <div class="point-value loser">610nm</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">$52.99</div>
+                            <div class="point-label">Price</div>
+                            <div class="point-value loser">$89.99</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">2 weeks</div>
+                            <div class="point-label">Results</div>
+                            <div class="point-value loser">4 weeks</div>
+                        </li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <span class="winner-badge">Best Technology</span>
+                    </div>
+                </div>
+
+                <!-- Comparison 3 -->
+                <div class="competitor-card">
+                    <div class="brand-comparison">
+                        <div class="brand-name aura">Aura Clara</div>
+                        <div class="vs-icon">VS</div>
+                        <div class="brand-name competitor">Brand Z</div>
+                    </div>
+                    <ul class="comparison-points">
+                        <li>
+                            <div class="point-value winner">6 hrs</div>
+                            <div class="point-label">Overnight</div>
+                            <div class="point-value loser">12 hrs</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">★★★★★</div>
+                            <div class="point-label">Reviews</div>
+                            <div class="point-value loser">★★★☆☆</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">36 patches</div>
+                            <div class="point-label">Quantity</div>
+                            <div class="point-value loser">24 patches</div>
+                        </li>
+                        <li>
+                            <div class="point-value winner">Yes</div>
+                            <div class="point-label">Free Shipping</div>
+                            <div class="point-value loser">No</div>
+                        </li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <span class="winner-badge">Best Overall</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="footer-logo">
+                    <p class="footer-tagline">Illuminate Your Beauty</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <a href="../products/clarity-patches.html">Clarity Patches</a>
+                    <a href="../products/neck-face-sculpting-tool.html">Face Tool</a>
+                    <a href="../products/index.html">All Products</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <a href="../index.html#about">About Us</a>
+                    <a href="ingredients.html">Ingredients</a>
+                    <a href="testimonials.html">Testimonials</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Contact</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Returns</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aura Clara. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/compare.js"></script>
+</body>
+</html>

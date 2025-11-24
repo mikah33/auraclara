@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="css/components/auth-modal.css">
     <link rel="stylesheet" href="css/components/exit-intent-popup.css">
     <link rel="stylesheet" href="css/components/social-proof.css">
+    <link rel="stylesheet" href="css/components/sustainability-badges.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -57,6 +58,8 @@
                 <div class="nav-links">
                     <a href="products/index.html">Shop</a>
                     <a href="#shop">Best Sellers</a>
+                    <a href="pages/testimonials.html">Reviews</a>
+                    <a href="pages/compare.html">Compare</a>
                     <a href="pages/newsletter.html">Newsletter</a>
                     <a href="#" id="accountLink">Account</a>
                 </div>
@@ -409,6 +412,35 @@
         </div>
     </section>
 
+    <!-- Sustainability Badges Section -->
+    <section class="sustainability-banner">
+        <div class="container">
+            <div class="sustainability-badges">
+                <div class="sustainability-badge">
+                    <span class="badge-icon">🌱</span>
+                    <span class="badge-text">100% Vegan</span>
+                </div>
+                <div class="sustainability-badge">
+                    <span class="badge-icon">🐰</span>
+                    <span class="badge-text">Cruelty-Free</span>
+                </div>
+                <div class="sustainability-badge">
+                    <span class="badge-icon">♻️</span>
+                    <span class="badge-text">Recyclable Packaging</span>
+                </div>
+                <div class="sustainability-badge">
+                    <span class="badge-icon">🚚</span>
+                    <span class="badge-text">Carbon-Neutral Shipping</span>
+                </div>
+                <div class="sustainability-badge">
+                    <span class="badge-icon">♀️</span>
+                    <span class="badge-text">Woman-Owned</span>
+                </div>
+            </div>
+            <a href="pages/sustainability.html" class="sustainability-link">Learn About Our Commitment →</a>
+        </div>
+    </section>
+
     <!-- Shop by Category Section -->
     <section class="shop-by-category">
         <div class="container">
@@ -444,7 +476,18 @@
     <!-- Products Grid Section -->
     <section class="home-products-grid" id="shop">
         <div class="container">
-            <h2 class="section-title">Shop All Products</h2>
+            <div class="section-header-with-compare">
+                <h2 class="section-title">Shop All Products</h2>
+                <a href="pages/compare.html" class="compare-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    Compare Products
+                </a>
+            </div>
             <div class="ios-products-grid">
                 <!-- Clarity Patches -->
                 <div class="ios-product-card" data-category="patches bestsellers" data-product-id="clarity-patches" data-product-name="Clarity Patches (36ct)" data-product-price="12.99" data-product-image="assets/images/product-packaging.png">
@@ -730,10 +773,11 @@
                 </div>
                 <div class="footer-section">
                     <h4>Learn</h4>
-                    <a href="#">About Us</a>
-                    <a href="#">Our Philosophy</a>
-                    <a href="#">Ingredients</a>
-                    <a href="#">Blog</a>
+                    <a href="#about">About Us</a>
+                    <a href="pages/testimonials.html">Reviews</a>
+                    <a href="pages/ingredients.html">Ingredients</a>
+                    <a href="pages/compare.html">Compare</a>
+                    <a href="pages/sustainability.html">Sustainability</a>
                 </div>
                 <div class="footer-section">
                     <h4>Support</h4>
