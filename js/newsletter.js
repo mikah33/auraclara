@@ -33,16 +33,14 @@ class NewsletterManager {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Subscribing...';
 
-            // Save to Supabase
+            // Save to Supabase with discount code (triggers n8n email automation)
             const { data, error } = await window.AuraClaraAuth.supabase
                 .from('newsletter_signups')
-                .insert([
-                    {
-                        email: email,
-                        source: 'website',
-                        user_id: null // Will be null unless user is logged in
-                    }
-                ])
+                .insert({
+                    email: email,
+                    source: 'homepage_newsletter',
+                    discount_code: 'WELCOME15'
+                })
                 .select();
 
             if (error) {
@@ -53,11 +51,8 @@ class NewsletterManager {
                     throw error;
                 }
             } else {
-                // Successfully subscribed
-                this.showMessage('Thank you for joining our circle! ✨', 'success');
-
-                // Send notification email to support
-                await this.notifySupport(email);
+                // Successfully subscribed - email will be sent automatically via n8n
+                this.showMessage('Thank you for joining our circle! Check your email for your 15% off code ✨', 'success');
             }
 
             // Clear form
@@ -74,14 +69,7 @@ class NewsletterManager {
         }
     }
 
-    async notifySupport(email) {
-        // Note: This would ideally be handled by a Supabase Edge Function
-        // For now, this logs the signup (you can set up a database trigger to send emails)
-        console.log(`New newsletter signup: ${email}`);
-
-        // You can optionally send an email notification here using a backend service
-        // or set up a database trigger in Supabase to send notifications
-    }
+    // notifySupport method removed - emails are now sent automatically via n8n webhook
 
     isValidEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
