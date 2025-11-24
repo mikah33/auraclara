@@ -3181,3 +3181,163 @@ p {
         padding: 0.5rem;
     }
 }
+
+/* ========================================
+   ABOUT US SECTION
+   ======================================== */
+
+.about-us {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(180deg, var(--white) 0%, var(--lavender-50) 100%);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-text {
+    padding-right: var(--spacing-md);
+}
+
+.about-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lavender-600);
+    background: var(--lavender-100);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.about-text .section-title {
+    text-align: left;
+    margin-bottom: var(--spacing-md);
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.about-intro {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+}
+
+.about-text p {
+    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.about-signature {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--lavender-200);
+}
+
+.about-signature p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--gray-600);
+    font-size: 1rem;
+}
+
+.about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.stat-item {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-number {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--lavender-600);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-600);
+}
+
+/* Mobile responsive for About Us */
+@media (max-width: 968px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .about-text {
+        padding-right: 0;
+    }
+
+    .about-text .section-title {
+        text-align: center;
+    }
+
+    .about-stats {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .stat-item {
+        flex: 1;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .about-intro {
+        font-size: 1rem;
+    }
+
+    .about-stats {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+}
