@@ -37,8 +37,10 @@
 }
 
 .badge-icon {
-    font-size: 2rem;
-    line-height: 1;
+    width: 48px;
+    height: 48px;
+    color: var(--lavender-500);
+    stroke-width: 1.5;
 }
 
 .badge-text {
@@ -137,7 +139,8 @@
     }
 
     .badge-icon {
-        font-size: 1.5rem;
+        width: 36px;
+        height: 36px;
     }
 
     .badge-text {
@@ -171,7 +174,8 @@
     }
 
     .badge-icon {
-        font-size: 1.25rem;
+        width: 32px;
+        height: 32px;
     }
 
     .badge-text {
