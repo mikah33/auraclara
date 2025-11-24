@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Newsletter | Join the Aura Clara Circle</title>
+    <meta name="description" content="Join the Aura Clara newsletter for exclusive skincare tips, early access to new products, and special offers delivered to your inbox.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon-rounded.png">
+    <meta name="theme-color" content="#E6D5F5">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* Newsletter Page Specific Styles */
+        .newsletter-page {
+            min-height: 100vh;
+            padding: 8rem 0 4rem;
+            background: linear-gradient(180deg, var(--lavender-50) 0%, var(--white) 50%, var(--lavender-50) 100%);
+        }
+
+        .newsletter-hero {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .newsletter-icon {
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-icon svg {
+            width: 80px;
+            height: 80px;
+            color: var(--lavender-500);
+        }
+
+        .newsletter-hero h1 {
+            font-family: var(--font-sans);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .newsletter-hero p {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* Newsletter Form */
+        .newsletter-form-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .newsletter-form-card h2 {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            color: var(--gray-800);
+            background: var(--white);
+            border: 2px solid var(--lavender-200);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--lavender-500);
+            box-shadow: 0 0 0 3px rgba(183, 136, 232, 0.1);
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: var(--lavender-500);
+        }
+
+        .form-checkbox-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        .btn-subscribe {
+            width: 100%;
+            padding: 1.25rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-subscribe:hover {
+            background: linear-gradient(135deg, var(--lavender-600) 0%, var(--lavender-500) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-subscribe:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            background: #10B981;
+            color: white;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Benefits Section */
+        .newsletter-benefits {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+        }
+
+        .newsletter-benefits h2 {
+            font-family: var(--font-sans);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--black);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            color: var(--lavender-500);
+        }
+
+        .benefit-card h3 {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-card p {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Social Proof */
+        .newsletter-proof {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .proof-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .proof-stat {
+            text-align: center;
+        }
+
+        .proof-number {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--lavender-600);
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .proof-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .newsletter-page {
+                padding: 6rem 0 3rem;
+            }
+
+            .newsletter-form-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .proof-stats {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo" aria-label="Aura Clara Home">
+                    <img src="../assets/images/logo.png" alt="Aura Clara logo" class="logo-img">
+                </a>
+                <div class="nav-links">
+                    <a href="../products/index.html">Shop</a>
+                    <a href="../index.html#shop">Best Sellers</a>
+                    <a href="newsletter.html">Newsletter</a>
+                    <a href="account.html">Account</a>
+                </div>
+                <div class="nav-icons">
+                    <a href="#search" class="icon-link" aria-label="Search products">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="16.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Newsletter Page -->
+    <main class="newsletter-page">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="newsletter-hero">
+                <div class="newsletter-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg>
+                </div>
+                <h1>Join the Aura Clara Circle</h1>
+                <p>Get exclusive skincare tips, early access to new products, and special offers delivered straight to your inbox. Plus, receive 15% off your first order when you subscribe!</p>
+            </div>
+
+            <!-- Newsletter Form -->
+            <div class="newsletter-form-card">
+                <h2>Subscribe to Our Newsletter</h2>
+                <form id="newsletter-form" class="newsletter-form">
+                    <div class="form-group">
+                        <label for="newsletter-name" class="form-label">Name</label>
+                        <input type="text" id="newsletter-name" name="name" class="form-input" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsletter-email" class="form-label">Email Address</label>
+                        <input type="email" id="newsletter-email" name="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" id="newsletter-consent" name="consent" class="form-checkbox" required>
+                        <label for="newsletter-consent" class="form-checkbox-label">
+                            I agree to receive marketing emails from Aura Clara. You can unsubscribe at any time. View our <a href="#" style="color: var(--lavender-600); text-decoration: underline;">Privacy Policy</a>.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-subscribe">
+                        Subscribe Now
+                    </button>
+
+                    <div class="success-message" id="success-message">
+                        🎉 Success! Check your email for your 15% off code.
+                    </div>
+                </form>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="newsletter-benefits">
+                <h2>What You'll Receive</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                        </svg>
+                        <h3>Exclusive Tips</h3>
+                        <p>Weekly skincare routines, ingredient insights, and beauty rituals from our experts.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                        </svg>
+                        <h3>Early Access</h3>
+                        <p>Be the first to know about new product launches and limited edition releases.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                        </svg>
+                        <h3>Special Offers</h3>
+                        <p>Subscriber-only discounts, birthday gifts, and exclusive promotions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Proof -->
+            <div class="newsletter-proof">
+                <div class="proof-stats">
+                    <div class="proof-stat">
+                        <span class="proof-number">Weekly</span>
+                        <span class="proof-label">Skincare Tips</span>
+                    </div>
+                    <div class="proof-stat">
+                        <span class="proof-number">15% Off</span>
+                        <span class="proof-label">Welcome Gift</span>
+                    </div>
+                    <div class="proof-stat">
+                        <span class="proof-number">No Spam</span>
+                        <span class="proof-label">Unsubscribe Anytime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo.png" alt="Aura Clara - Illuminate Your Beauty" class="footer-logo">
+                    <p class="footer-tagline">Illuminate Your Beauty</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/auraclara" aria-label="Instagram" target="_blank">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="https://tiktok.com/@auraclara" aria-label="TikTok" target="_blank">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 10C17.5 10 16 9.5 15 8.5V16C15 18.5 13 21 10 21C7 21 5 18.5 5 16C5 13.5 7 11 10 11V14C8.5 14 8 15 8 16C8 17 8.5 18 10 18C11.5 18 12 17 12 16V3H15C15 3.5 15.5 7 19 7V10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <a href="../products/clarity-patches.html">Clarity Patches</a>
+                    <a href="../products/index.html">All Products</a>
+                    <a href="../index.html#shop">Bestsellers</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Our Philosophy</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Contact</a>
+                    <a href="#">Shipping</a>
+                    <a href="#">Returns</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aura Clara. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/auth/supabase-client.js"></script>
+
+    <!-- Main Script -->
+    <script src="../js/main.js"></script>
+
+    <!-- Newsletter Form Script -->
+    <script>
+        const newsletterForm = document.getElementById('newsletter-form');
+        const successMessage = document.getElementById('success-message');
+        const submitBtn = newsletterForm.querySelector('.btn-subscribe');
+
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('newsletter-name').value.trim();
+            const email = document.getElementById('newsletter-email').value.trim();
+            const consent = document.getElementById('newsletter-consent').checked;
+
+            if (!consent) {
+                alert('Please agree to receive marketing emails.');
+                return;
+            }
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Subscribing...';
+
+            try {
+                // Subscribe to newsletter via Supabase
+                if (window.AuraClaraAuth?.supabase) {
+                    const { data, error } = await window.AuraClaraAuth.supabase
+                        .from('newsletter_signups')
+                        .insert({
+                            email: email,
+                            source: 'newsletter_page',
+                            discount_code: 'WELCOME15'
+                        })
+                        .select();
+
+                    if (error) {
+                        console.error('Supabase insert error:', error);
+
+                        // If duplicate email, that's okay - still show success
+                        if (error.code !== '23505') {
+                            throw error;
+                        }
+                    }
+
+                    console.log('Newsletter signup successful:', data);
+                }
+
+                // Show success message
+                successMessage.textContent = `🎉 Success! Check ${email} for your 15% off code (WELCOME15)`;
+                successMessage.classList.add('show');
+                newsletterForm.reset();
+
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Subscribe Now';
+
+                // Hide success message after 8 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 8000);
+
+            } catch (error) {
+                console.error('Newsletter subscription error:', error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Subscribe Now';
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

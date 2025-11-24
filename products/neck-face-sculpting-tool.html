@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Neck & Face Sculpting Tool | Aura Clara</title>
+    <meta name="description" content="Sculpt, de-puff, and rejuvenate with our premium Neck & Face Sculpting Tool. LED light therapy, multiple modes, and visible results in days.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon-rounded.png">
+    <meta name="theme-color" content="#E6D5F5">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/product-page.css">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>🔥 BLACK FRIDAY SALE | Use code <strong>BLACKFRI25</strong> for 25% off</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-product">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo" aria-label="Aura Clara Home">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="logo-img">
+                </a>
+                <div class="nav-icons">
+                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="16.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Product Section -->
+    <main class="product-page">
+        <!-- Product Hero -->
+        <section class="product-hero">
+            <!-- Product Gallery -->
+            <div class="product-gallery-mobile">
+                <div class="gallery-main">
+                    <div class="discount-badge">SAVE 30%</div>
+                    <img src="../assets/images/face-sculpting-tool-box.png" alt="Neck & Face Sculpting Tool" class="gallery-main-img" id="main-product-img">
+
+                    <!-- Customer Testimonial Overlay -->
+                    <div class="testimonial-overlay">
+                        <div class="testimonial-avatar">
+                            <img src="../assets/images/testimonial-avatar-1.jpg" alt="Sarah M." onerror="this.style.display='none'">
+                        </div>
+                        <div class="testimonial-content">
+                            <strong>Sarah M.</strong>
+                            <p>"My jawline is so much more defined after just 2 weeks! I use it every night while watching TV."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-thumbnails">
+                    <img src="../assets/images/face-sculpting-tool-box.png" alt="Product packaging" class="thumb active" onclick="changeProductImage(this)">
+                    <img src="../assets/images/neck-roller.jpg" alt="Morning and night guide" class="thumb" onclick="changeProductImage(this)">
+                    <img src="../assets/images/neck-roller-use.jpg" alt="In use" class="thumb" onclick="changeProductImage(this)">
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info-mobile">
+                <!-- Social Proof -->
+                <div class="social-proof-bar">
+                    <div class="star-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(2,847 reviews)</span>
+                    </div>
+                    <span class="sold-count">12K+ sold</span>
+                </div>
+
+                <!-- Product Title -->
+                <h1 class="product-title-main">Sculpt Your Dream Jawline in 5 Minutes a Day</h1>
+                <p class="product-subtitle-main">Neck & Face Sculpting Tool with LED Therapy</p>
+
+                <!-- Key Benefits -->
+                <div class="key-benefits">
+                    <div class="benefit-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Visible results in 7 days</span>
+                    </div>
+                    <div class="benefit-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>90-day money back guarantee</span>
+                    </div>
+                    <div class="benefit-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>LED light therapy included</span>
+                    </div>
+                    <div class="benefit-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>For all skin types</span>
+                    </div>
+                </div>
+
+                <!-- Pricing Options -->
+                <div class="pricing-section">
+                    <!-- Single Purchase -->
+                    <div class="pricing-option" data-option="single" data-price="52.99">
+                        <div class="option-header">
+                            <input type="radio" name="purchase-type" id="single" checked>
+                            <label for="single">
+                                <span class="option-title">Buy 1</span>
+                            </label>
+                        </div>
+                        <div class="option-price">
+                            <span class="price-current">$52.99</span>
+                            <span class="price-original">$75.99</span>
+                        </div>
+                    </div>
+
+                    <!-- Buy 2 Get 1 Free -->
+                    <div class="pricing-option pricing-option-recommended" data-option="bundle" data-price="105.98">
+                        <div class="recommended-badge">BUY 2 GET 1 FREE - BEST VALUE</div>
+                        <div class="option-header">
+                            <input type="radio" name="purchase-type" id="bundle">
+                            <label for="bundle">
+                                <span class="option-title">Buy 2 Get 1 FREE</span>
+                            </label>
+                        </div>
+                        <div class="option-price">
+                            <span class="price-current">$105.98</span>
+                            <span class="price-original">$158.97</span>
+                        </div>
+                        <div class="bundle-benefits">
+                            <div class="sub-benefit">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span><strong>SAVE $52.99</strong> (33% off)</span>
+                            </div>
+                            <div class="sub-benefit">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span><strong>FREE SHIPPING</strong> included</span>
+                            </div>
+                            <div class="sub-benefit">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Perfect for gifting</span>
+                            </div>
+                            <div class="sub-benefit">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Only $35.33 each</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Urgency Notice -->
+                <div class="urgency-notice">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="7" stroke="#EF4444" stroke-width="1.5"/>
+                        <path d="M8 4V8.5L10.5 10" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <div class="urgency-text">
+                        <strong>LOW STOCK WARNING:</strong> Only 23 left! This product sold out 3 times last month.
+                    </div>
+                </div>
+
+                <!-- Add to Cart Button -->
+                <button class="btn-add-to-cart">
+                    <span>Add to Cart - $52.99</span>
+                </button>
+
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 1L12.5 6.5L18.5 7L14 11L15.5 17L10 14L4.5 17L6 11L1.5 7L7.5 6.5L10 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        </svg>
+                        <span>90-Day Guarantee</span>
+                    </div>
+                    <div class="trust-badge">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L3 5V9.5C3 13.5 6 17 10 18C14 17 17 13.5 17 9.5V5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            <path d="M7 10L9 12L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Secure Checkout</span>
+                    </div>
+                    <div class="trust-badge">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M6 15L3 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M14 15L17 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Free Shipping $50+</span>
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <div class="payment-icons">
+                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688"/></svg>
+                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-mastercard"><title id="pi-mastercard">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><circle fill="#EB001B" cx="15" cy="12" r="7"/><circle fill="#F79E1B" cx="23" cy="12" r="7"/><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"/></svg>
+                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-amex"><title id="pi-amex">American Express</title><path fill="#000" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" opacity=".07"/><path fill="#006FCF" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#FFF" d="M22.012 19.936v-8.421L37 11.528v2.326l-1.732 1.852L37 17.573v2.375h-2.766l-1.47-1.622-1.46 1.628-9.292-.02z"/><path fill="#006FCF" d="M23.013 19.012v-6.57h5.572v1.513h-3.768v1.028h3.678v1.488h-3.678v1.01h3.768v1.531h-5.572z"/><path fill="#006FCF" d="M28.557 19.012L31.09 15.7l-2.51-3.31h2.275l1.343 1.916 1.362-1.916h2.244l-2.509 3.31 2.533 3.312h-2.263l-1.38-1.939-1.369 1.939h-2.26z"/></svg>
+                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-paypal"><title id="pi-paypal">PayPal</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z"/><path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4v-.1l.4-2.4v-.1c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.2-3.3.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.6-.7z"/><path fill="#012169" d="M23.3 8.1c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3-.1-.3-.1-.7-.1-1.1-.1h-3c-.1 0-.2 0-.2.1-.2.1-.3.2-.3.4l-.7 4.4v.1c0-.3.3-.5.6-.5h1.3c2.5 0 4.1-1 4.6-3.8v-.2c-.1-.1-.3-.2-.5-.2h-.1z"/></svg>
+                        <svg viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-apple-pay"><title id="pi-apple-pay">Apple Pay</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#000" d="M12.3 8.4c-.3.4-.7.6-1.2.6-.1 0-.2 0-.4-.1-.6-.2-.9-.7-.9-1.2 0-.1 0-.3.1-.4.1-.5.5-.8 1-1 .3-.1.7-.1 1 0 .3.1.5.3.7.5-.1.1-.2.3-.3.4-.2-.1-.4-.2-.7-.2-.4 0-.7.2-.9.5-.1.2-.1.5 0 .7.1.3.4.5.7.5.2 0 .5-.1.6-.2l.3.3zm1.5-.1c0 .3.1.5.3.7.2.2.4.2.7.2.3 0 .5-.1.7-.3.2-.2.3-.4.3-.7v-.3l-.8.3c-.4.1-.7.1-1 0-.3-.2-.5-.5-.5-.9 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3.4 0 .8.2 1 .5v-.4h.7v2.1c0 .4-.2.8-.5 1-.3.3-.7.4-1.2.4-.4 0-.7-.1-1-.3-.2-.2-.4-.4-.5-.7l.7-.1c.1.2.3.4.6.4.2 0 .5 0 .6-.2.2-.1.2-.4.2-.6l-.4.1c-.4.2-.7.2-1 .1-.3-.2-.5-.5-.5-.9v-.3h-.4v-.1zm1.4-.5c-.1-.1-.3-.2-.5-.2s-.4.1-.5.2c-.1.2-.2.3-.2.5l1-.4c0-.1-.1-.2-.2-.3l.4.2zm4.4-2h.7v4.6h-.7v-.4c-.2.3-.5.5-.9.5-.4 0-.7-.2-.9-.5-.3-.3-.4-.7-.4-1.1 0-.4.1-.8.4-1.1.2-.3.6-.5 1-.5.3 0 .6.1.8.4V5.8zm-1.6 2.8c0 .3.1.5.2.7.2.2.4.3.7.3.3 0 .5-.1.7-.3.2-.2.3-.4.3-.7 0-.3-.1-.5-.3-.7-.2-.2-.4-.3-.7-.3-.3 0-.5.1-.7.3-.2.2-.2.4-.2.7zm3.8-.6c.2-.4.5-.6 1-.6v.8c-.3 0-.6.1-.8.3-.2.2-.3.5-.3.8v1.4h-.7V8h.7v.6l.1-.6zm2.3-.6c.3-.3.7-.5 1.1-.5.4 0 .8.2 1.1.5.3.3.4.7.4 1.2 0 .5-.2.9-.4 1.2-.3.3-.7.5-1.1.5-.4 0-.8-.2-1.1-.5-.3-.3-.4-.7-.4-1.2-.1-.5.1-.9.4-1.2zm.5 1.9c.2.2.4.3.6.3.3 0 .5-.1.6-.3.2-.2.2-.4.2-.7 0-.3-.1-.5-.2-.7-.2-.2-.4-.3-.6-.3-.3 0-.5.1-.6.3-.2.2-.2.4-.2.7 0 .3.1.5.2.7zm2.5-1.3c.1-.2.2-.4.4-.5.2-.1.4-.2.6-.2.3 0 .6.1.8.3v-.3h.7v2.9h-.7v-.3c-.2.2-.5.4-.8.4-.2 0-.5-.1-.6-.2-.2-.1-.3-.3-.4-.5-.1-.2-.1-.5-.1-.8v-1.3h.1v.5zm.7.3c-.1.1-.2.3-.2.5v.8c0 .2.1.4.2.5.1.1.3.2.5.2s.4-.1.5-.2c.1-.1.2-.3.2-.5v-.8c0-.2-.1-.4-.2-.5-.1-.1-.3-.2-.5-.2s-.4.1-.5.2zm3.2 1.5c-.2.2-.5.3-.8.3-.6 0-1.1-.4-1.2-1l.6-.1c.1.3.3.5.6.5.1 0 .3 0 .4-.1.1-.1.2-.2.2-.3 0-.1-.1-.2-.1-.3-.1-.1-.2-.1-.4-.2l-.4-.1c-.2-.1-.4-.2-.5-.3-.1-.2-.2-.3-.2-.5 0-.3.1-.5.3-.6.2-.2.4-.3.7-.3.5 0 .9.3 1.1.7l-.5.2c-.1-.2-.3-.3-.5-.3-.1 0-.2 0-.3.1-.1.1-.1.1-.1.2 0 .1 0 .2.1.2.1.1.2.1.3.1l.4.1c.2.1.4.2.5.4.1.2.2.4.2.6 0 .3-.1.5-.3.7z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title-sm">Why You'll Love It</h2>
+
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                        </svg>
+                    </div>
+                    <h3>LED Light Therapy</h3>
+                    <p>Red light promotes collagen production and reduces fine lines</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <h3>Precision Sculpting</h3>
+                    <p>Contoured design targets jawline, neck, and cheekbones</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                        </svg>
+                    </div>
+                    <h3>Multiple Modes</h3>
+                    <p>Customize intensity for your comfort and skin sensitivity</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5ZM3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
+                        </svg>
+                    </div>
+                    <h3>Long Battery Life</h3>
+                    <p>USB rechargeable, lasts 2+ weeks on single charge</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use-section">
+            <h2 class="section-title-sm">How to Use</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Cleanse & Apply Serum</h4>
+                        <p>Start with clean skin. Apply your favorite serum or moisturizer for better glide.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Power On & Select Mode</h4>
+                        <p>Turn on the device and choose your preferred intensity level.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Glide Upward & Outward</h4>
+                        <p>Use gentle pressure, moving from center of face outward, and neck upward. 5 minutes per area.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Use Daily for Best Results</h4>
+                        <p>Morning to de-puff, evening to relax. Consistency is key!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <h2 class="section-title-sm">Real Results from Real People</h2>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"I was skeptical at first, but after 2 weeks my jawline is noticeably more defined. My husband even commented on it!"</p>
+                    <div class="testimonial-author">
+                        <strong>Jessica R.</strong>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The LED light therapy is a game changer. My skin looks brighter and the puffiness around my neck is gone."</p>
+                    <div class="testimonial-author">
+                        <strong>Amanda K.</strong>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"I use this every morning while having coffee. It's become my favorite self-care ritual. So relaxing!"</p>
+                    <div class="testimonial-author">
+                        <strong>Michelle T.</strong>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="section-title-sm">Frequently Asked Questions</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How long until I see results?</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Most customers notice reduced puffiness after the first use. Visible sculpting results typically appear within 7-14 days of consistent daily use.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is it safe for sensitive skin?</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! Our tool has multiple intensity settings so you can start gentle and increase as comfortable. It's suitable for all skin types including sensitive skin.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I clean and maintain it?</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Simply wipe with a soft, damp cloth after each use. Do not submerge in water. Store in the included pouch to protect from dust.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What's your return policy?</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer a 90-day money-back guarantee. If you're not completely satisfied, contact us for a full refund - no questions asked.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta-section">
+            <h2>Ready to Transform Your Skincare Ritual?</h2>
+            <p>Join 12,000+ women who've discovered their best skin</p>
+            <button class="btn-add-to-cart btn-cta-final">
+                Add to Cart - $52.99
+            </button>
+            <p class="guarantee-text">90-Day Money-Back Guarantee • Free Shipping over $50</p>
+        </section>
+    </main>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-sticky-cta">
+        <div class="sticky-price">
+            <span class="sticky-current">$52.99</span>
+            <span class="sticky-original">$75.99</span>
+        </div>
+        <button class="btn-sticky-cart">Add to Cart</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer footer-simple">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aura Clara. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Change product image
+        function changeProductImage(thumb) {
+            const mainImg = document.getElementById('main-product-img');
+            mainImg.src = thumb.src;
+
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+        // Toggle FAQ
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+            // Open clicked if was closed
+            if (!isOpen) {
+                item.classList.add('open');
+            }
+        }
+
+        // Pricing option selection
+        document.querySelectorAll('.pricing-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+
+                document.querySelectorAll('.pricing-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+
+                // Update button price
+                const price = this.querySelector('.price-current').textContent;
+                document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
+                    btn.querySelector('span') ? btn.querySelector('span').textContent = `Add to Cart - ${price}` : btn.textContent = `Add to Cart - ${price}`;
+                });
+            });
+        });
+
+        // Mobile sticky CTA visibility
+        const stickyCtA = document.querySelector('.mobile-sticky-cta');
+        const heroSection = document.querySelector('.product-hero');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    stickyCtA.classList.remove('visible');
+                } else {
+                    stickyCtA.classList.add('visible');
+                }
+            });
+        }, { threshold: 0 });
+
+        if (heroSection) observer.observe(heroSection);
+    </script>
+</body>
+</html>

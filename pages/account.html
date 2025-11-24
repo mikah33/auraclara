@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Aura Clara</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components/auth-modal.css">
+    <link rel="stylesheet" href="../css/pages/account.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo" aria-label="Aura Clara Home">
+                    <img src="../assets/images/logo.png" alt="Aura Clara logo" class="logo-img">
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html#shop">Shop</a>
+                    <a href="../index.html#bestsellers">Best Sellers</a>
+                    <a href="../index.html#deals">Deals</a>
+                    <a href="../index.html#newsletter">Newsletter</a>
+                    <a href="account.html" class="active">Account</a>
+                </div>
+                <div class="nav-icons">
+                    <a href="#search" class="icon-link" aria-label="Search products">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="16.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-count" aria-label="Cart items">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Account Dashboard -->
+    <section class="account-page">
+        <div class="container">
+            <div class="account-header">
+                <h1>My Account</h1>
+                <p id="account-greeting">Welcome back!</p>
+            </div>
+
+            <div class="account-grid">
+                <!-- Sidebar Navigation -->
+                <aside class="account-sidebar">
+                    <nav class="account-nav">
+                        <button class="account-nav-item active" data-section="profile">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M3 18C3 14 6 11 10 11C14 11 17 14 17 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            Profile
+                        </button>
+                        <button class="account-nav-item" data-section="orders">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M7 9H13M7 12H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M7 1V4M13 1V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            Orders
+                        </button>
+                        <button class="account-nav-item" data-section="security">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2L3 5V9C3 13.5 6 17 10 18C14 17 17 13.5 17 9V5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Security
+                        </button>
+                        <button class="account-nav-item" data-section="support">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M10 7V10M10 13H10.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            Support
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="account-content">
+                    <!-- Profile Section -->
+                    <section id="profile-section" class="account-section active">
+                        <h2>Profile Information</h2>
+                        <form id="profile-form" class="account-form">
+                            <div class="form-group">
+                                <label for="profile-name">Full Name</label>
+                                <input type="text" id="profile-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">Email Address</label>
+                                <input type="email" id="profile-email" disabled>
+                                <small>Contact support to change your email</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+
+                        <div class="section-divider"></div>
+
+                        <h3>Newsletter Preferences</h3>
+                        <div class="newsletter-preferences">
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Email Newsletter</h4>
+                                    <p>Receive exclusive offers, new product announcements, and skincare tips</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="newsletter-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p id="newsletter-status" class="newsletter-status"></p>
+                        </div>
+                    </section>
+
+                    <!-- Orders Section -->
+                    <section id="orders-section" class="account-section">
+                        <h2>Order History</h2>
+                        <div id="orders-list" class="orders-list">
+                            <div class="empty-state">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <circle cx="32" cy="32" r="32" fill="#F8F4FC"/>
+                                    <path d="M24 28H40M24 34H36" stroke="#E6D5F5" stroke-width="2" stroke-linecap="round"/>
+                                    <rect x="20" y="22" width="24" height="20" rx="2" stroke="#B8A5D0" stroke-width="2"/>
+                                </svg>
+                                <h3>No orders yet</h3>
+                                <p>Your order history will appear here</p>
+                                <a href="../index.html#shop" class="btn btn-outline">Start Shopping</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Security Section -->
+                    <section id="security-section" class="account-section">
+                        <h2>Security Settings</h2>
+
+                        <div class="security-card">
+                            <h3>Change Password</h3>
+                            <p>Update your password to keep your account secure</p>
+                            <form id="password-form" class="account-form">
+                                <div class="form-group">
+                                    <label for="current-password">Current Password</label>
+                                    <input type="password" id="current-password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-password">New Password</label>
+                                    <input type="password" id="new-password" required minlength="8">
+                                    <small>Minimum 8 characters</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm-password">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" required minlength="8">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Password</button>
+                            </form>
+                        </div>
+
+                        <div class="security-card">
+                            <h3>Account Activity</h3>
+                            <p>Last sign in: <span id="last-signin">Loading...</span></p>
+                        </div>
+                    </section>
+
+                    <!-- Support Section -->
+                    <section id="support-section" class="account-section">
+                        <h2>Contact Support</h2>
+                        <p class="support-intro">Need help? Our team is here for you. Send us a message and we'll get back to you within 24 hours.</p>
+
+                        <form id="support-form" class="account-form">
+                            <div class="form-group">
+                                <label for="support-subject">Subject</label>
+                                <select id="support-subject" required>
+                                    <option value="">Select a topic</option>
+                                    <option value="order">Order Issue</option>
+                                    <option value="product">Product Question</option>
+                                    <option value="shipping">Shipping</option>
+                                    <option value="account">Account</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="support-message">Message</label>
+                                <textarea id="support-message" rows="6" required placeholder="Tell us how we can help..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+
+                        <div class="support-info">
+                            <h3>Other Ways to Reach Us</h3>
+                            <p><strong>Email:</strong> <a href="mailto:support@auraclara.store">support@auraclara.store</a></p>
+                            <p><strong>Response Time:</strong> Within 24 hours</p>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo.png" alt="Aura Clara" class="footer-logo">
+                    <p class="footer-tagline">Illuminate Your Beauty</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <a href="../index.html#shop">Clarity Patches</a>
+                    <a href="../index.html#bestsellers">Bestsellers</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="account.html#support">Contact</a>
+                    <a href="#">Shipping</a>
+                    <a href="#">Returns</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success/Error Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Scripts -->
+    <script src="../js/auth/supabase-client.js"></script>
+    <script src="../js/account/account-manager.js"></script>
+</body>
+</html>

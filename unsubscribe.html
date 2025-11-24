@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribe - Aura Clara</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #E6D5F5 0%, #F9F7FC 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(125, 83, 178, 0.15);
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: #7D53B2;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #2D1B4E;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #6B4E8E;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #7D53B2 0%, #9B6FD6 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #7D53B2;
+            border: 2px solid #7D53B2;
+            margin-left: 10px;
+        }
+
+        .status-message {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+
+        .status-message.error {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid #E6D5F5;
+            border-top: 3px solid #7D53B2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">AURA CLARA</div>
+
+        <div id="loadingState" class="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 20px;">Processing...</p>
+        </div>
+
+        <div id="confirmState">
+            <div class="icon">😢</div>
+            <h1>Unsubscribe from Emails</h1>
+            <p>We're sorry to see you go. Are you sure you want to unsubscribe from Aura Clara emails?</p>
+            <button id="unsubscribeBtn" class="btn">Yes, Unsubscribe</button>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </div>
+
+        <div id="successState" style="display: none;">
+            <div class="icon">✓</div>
+            <h1>Successfully Unsubscribed</h1>
+            <p id="successEmail"></p>
+            <p>You've been removed from our mailing list and won't receive any more emails from us.</p>
+            <a href="/" class="btn">Return to Homepage</a>
+        </div>
+
+        <div id="errorState" style="display: none;">
+            <div class="icon">⚠️</div>
+            <h1>Something Went Wrong</h1>
+            <p id="errorMessage"></p>
+            <a href="/" class="btn">Return to Homepage</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Get token from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        const confirmState = document.getElementById('confirmState');
+        const successState = document.getElementById('successState');
+        const errorState = document.getElementById('errorState');
+        const loadingState = document.getElementById('loadingState');
+        const unsubscribeBtn = document.getElementById('unsubscribeBtn');
+
+        // If no token, show error
+        if (!token) {
+            showError('Invalid unsubscribe link. Please check your email for the correct link.');
+        }
+
+        // Handle unsubscribe button click
+        unsubscribeBtn.addEventListener('click', async () => {
+            confirmState.style.display = 'none';
+            loadingState.style.display = 'block';
+
+            try {
+                // Call the unsubscribe Edge Function
+                const response = await fetch('https://pcyohjfdxkujufprlkxh.supabase.co/functions/v1/unsubscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjeW9oamZkeGt1anVmcHJsa3hoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwNDI1MzUsImV4cCI6MjA3NTYxODUzNX0.AkCD_O-CewziIehY1Dwwea_3OYsTTPuqdgRmLR8f7NY'
+                    },
+                    body: JSON.stringify({ token })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to unsubscribe');
+                }
+
+                // Show success
+                loadingState.style.display = 'none';
+                successState.style.display = 'block';
+                document.getElementById('successEmail').textContent =
+                    `${data.email} has been successfully unsubscribed.`;
+
+            } catch (error) {
+                console.error('Unsubscribe error:', error);
+                loadingState.style.display = 'none';
+                showError(error.message || 'Failed to process your request. Please try again.');
+            }
+        });
+
+        function showError(message) {
+            confirmState.style.display = 'none';
+            loadingState.style.display = 'none';
+            errorState.style.display = 'block';
+            document.getElementById('errorMessage').textContent = message;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+/* ========================================
+   AURA CLARA - Exit Intent Popup Styles
+   ======================================== */
+
+.exit-intent-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.exit-intent-popup.exit-popup-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.exit-intent-popup.exit-popup-closing {
+    opacity: 0;
+}
+
+.exit-popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.exit-popup-content {
+    position: relative;
+    background: white;
+    border-radius: 24px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.exit-popup-visible .exit-popup-content {
+    transform: scale(1);
+}
+
+.exit-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--gray-700);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.exit-popup-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+
+.exit-popup-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    padding: 3rem;
+    align-items: center;
+}
+
+.exit-popup-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--lavender-50) 0%, var(--white) 100%);
+    border-radius: 16px;
+}
+
+.exit-popup-image img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    object-fit: contain;
+}
+
+.exit-popup-text {
+    text-align: left;
+}
+
+.exit-popup-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.exit-popup-text h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.exit-popup-text p {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.exit-popup-form {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.exit-popup-form input {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--lavender-200);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.exit-popup-form input:focus {
+    outline: none;
+    border-color: var(--lavender-500);
+    box-shadow: 0 0 0 3px rgba(155, 109, 217, 0.1);
+}
+
+.btn-popup-submit {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-popup-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(155, 109, 217, 0.4);
+}
+
+.btn-popup-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.exit-popup-trust {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.exit-popup-trust span {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+}
+
+.exit-popup-privacy {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    line-height: 1.4;
+}
+
+/* Success State */
+.exit-popup-success {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 1.5rem;
+}
+
+.exit-popup-success h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.exit-popup-success p {
+    text-align: center;
+}
+
+.success-discount-code {
+    background: var(--lavender-50);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+}
+
+.success-discount-code strong {
+    font-size: 1.5rem;
+    color: var(--lavender-600);
+    font-family: monospace;
+    letter-spacing: 0.1em;
+}
+
+.btn-popup-shop {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.btn-popup-shop:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(155, 109, 217, 0.4);
+}
+
+/* Error State */
+.exit-popup-error {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: #FEE2E2;
+    color: #991B1B;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .exit-popup-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .exit-popup-image {
+        padding: 1.5rem;
+    }
+
+    .exit-popup-image img {
+        max-width: 200px;
+    }
+
+    .exit-popup-text {
+        text-align: center;
+    }
+
+    .exit-popup-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .exit-popup-text p {
+        font-size: 1rem;
+    }
+
+    .exit-popup-form {
+        flex-direction: column;
+    }
+
+    .exit-popup-trust {
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .exit-popup-content {
+        width: 95%;
+        border-radius: 16px;
+    }
+
+    .exit-popup-inner {
+        padding: 1.5rem 1rem;
+    }
+
+    .exit-popup-close {
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+    }
+}

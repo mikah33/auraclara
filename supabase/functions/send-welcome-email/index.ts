@@ -1,0 +1,293 @@
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
+interface NewsletterSignup {
+  email: string
+  discount_code: string
+  unsubscribe_token: string
+}
+
+// Simple SMTP send function using Deno's native TLS
+async function sendEmailViaSMTP(to: string, subject: string, html: string) {
+  const username = Deno.env.get("MIGADU_USERNAME")!
+  const password = Deno.env.get("MIGADU_PASSWORD")!
+  const from = Deno.env.get("MIGADU_FROM_EMAIL") || "support@auraclara.store"
+
+  try {
+    // Connect to SMTP server
+    const conn = await Deno.connectTls({
+      hostname: "smtp.migadu.com",
+      port: 465,
+    })
+
+    const encoder = new TextEncoder()
+    const decoder = new TextDecoder()
+
+    // Helper to read response
+    const readResponse = async () => {
+      const buffer = new Uint8Array(1024)
+      const n = await conn.read(buffer)
+      return decoder.decode(buffer.subarray(0, n || 0))
+    }
+
+    // Helper to send command
+    const sendCommand = async (command: string) => {
+      await conn.write(encoder.encode(command + "\r\n"))
+      return await readResponse()
+    }
+
+    // SMTP conversation
+    await readResponse() // Server greeting
+    await sendCommand(`EHLO auraclara.store`)
+    await sendCommand(`AUTH LOGIN`)
+    await sendCommand(btoa(username))
+    await sendCommand(btoa(password))
+    await sendCommand(`MAIL FROM:<${from}>`)
+    await sendCommand(`RCPT TO:<${to}>`)
+    await sendCommand(`DATA`)
+
+    const emailContent = [
+      `From: Aura Clara <${from}>`,
+      `To: ${to}`,
+      `Subject: ${subject}`,
+      `MIME-Version: 1.0`,
+      `Content-Type: text/html; charset=UTF-8`,
+      ``,
+      html,
+      `.`
+    ].join("\r\n")
+
+    await sendCommand(emailContent)
+    await sendCommand(`QUIT`)
+
+    conn.close()
+    return { success: true }
+  } catch (error) {
+    console.error('SMTP Error:', error)
+    throw error
+  }
+}
+
+serve(async (req) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
+
+  try {
+    const { record } = await req.json() as { record: NewsletterSignup }
+
+    console.log('Sending welcome email to:', record.email)
+
+    // Your website URL (update this to your actual domain)
+    const baseUrl = Deno.env.get("SITE_URL") || "https://www.auraclara.com"
+    const unsubscribeUrl = `${baseUrl}/unsubscribe?token=${record.unsubscribe_token}`
+
+    // Email HTML template
+    const emailHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      line-height: 1.6;
+      color: #2D1B4E;
+      margin: 0;
+      padding: 0;
+      background-color: #F9F7FC;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(125, 83, 178, 0.1);
+    }
+    .header {
+      background: linear-gradient(135deg, #7D53B2 0%, #C197D2 100%);
+      padding: 40px 30px;
+      text-align: center;
+    }
+    .logo {
+      font-size: 32px;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    h1 {
+      font-size: 28px;
+      color: #2D1B4E;
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+    .discount-box {
+      background: linear-gradient(135deg, #E6D5F5 0%, #F3E8FF 100%);
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      margin: 30px 0;
+      border: 2px dashed #7D53B2;
+    }
+    .discount-code {
+      font-size: 36px;
+      font-weight: 700;
+      color: #7D53B2;
+      letter-spacing: 4px;
+      margin: 10px 0;
+    }
+    .discount-label {
+      font-size: 14px;
+      color: #6B4E8E;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7D53B2 0%, #9B6FD6 100%);
+      color: white;
+      padding: 16px 40px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 20px 0;
+      transition: transform 0.2s;
+    }
+    .features {
+      margin: 30px 0;
+    }
+    .feature {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      font-size: 15px;
+    }
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      background: #E6D5F5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: #7D53B2;
+      font-weight: bold;
+    }
+    .footer {
+      background: #F9F7FC;
+      padding: 30px;
+      text-align: center;
+      font-size: 13px;
+      color: #6B4E8E;
+    }
+    .unsubscribe {
+      margin-top: 20px;
+      font-size: 12px;
+    }
+    .unsubscribe a {
+      color: #7D53B2;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2 class="logo">AURA CLARA</h2>
+    </div>
+
+    <div class="content">
+      <h1>Welcome to Aura Clara ✨</h1>
+
+      <p>Thank you for joining 50,000+ customers who wake up to clearer, more radiant skin.</p>
+
+      <div class="discount-box">
+        <div class="discount-label">Your Exclusive Discount Code</div>
+        <div class="discount-code">${record.discount_code}</div>
+        <p style="margin: 10px 0 0 0; color: #6B4E8E;">Save 15% on your first order</p>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="${baseUrl}/products" class="btn">Start Shopping</a>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <div>Free shipping on orders $50+</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <div>60-day money-back guarantee</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <div>Vegan & cruelty-free</div>
+        </div>
+      </div>
+
+      <p style="margin-top: 30px;">We're excited to be part of your skincare journey. Stay tuned for exclusive offers, new product launches, and skincare tips.</p>
+
+      <p style="margin-top: 20px; color: #6B4E8E;"><em>Clear your aura, clear your skin.</em></p>
+    </div>
+
+    <div class="footer">
+      <p><strong>Aura Clara</strong><br>
+      Illuminate Your Beauty</p>
+
+      <p style="margin: 15px 0;">
+        <a href="${baseUrl}" style="color: #7D53B2; text-decoration: none; margin: 0 10px;">Shop</a> |
+        <a href="${baseUrl}/#philosophy" style="color: #7D53B2; text-decoration: none; margin: 0 10px;">About</a> |
+        <a href="mailto:support@auraclara.com" style="color: #7D53B2; text-decoration: none; margin: 0 10px;">Contact</a>
+      </p>
+
+      <div class="unsubscribe">
+        <p>You're receiving this because you signed up for Aura Clara updates.<br>
+        <a href="${unsubscribeUrl}">Unsubscribe</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+    `
+
+    // Send email via Migadu SMTP
+    await sendEmailViaSMTP(
+      record.email,
+      'Welcome to Aura Clara ✨ Here\'s Your 15% Off',
+      emailHtml
+    )
+
+    console.log('Welcome email sent successfully to:', record.email)
+
+    return new Response(
+      JSON.stringify({ success: true, message: 'Welcome email sent' }),
+      {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200,
+      },
+    )
+  } catch (error) {
+    console.error('Error sending welcome email:', error)
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 500,
+      },
+    )
+  }
+})

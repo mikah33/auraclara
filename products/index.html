@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Shop All Products | Aura Clara Skincare</title>
+    <meta name="description" content="Shop all Aura Clara premium skincare products. Clear breakouts, fade fine lines, and reveal your best skin.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon-rounded.png">
+    <meta name="theme-color" content="#E6D5F5">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Products Page Specific Styles */
+        .products-header {
+            padding: 8rem 0 3rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--lavender-50) 0%, var(--white) 100%);
+        }
+
+        .products-header h1 {
+            font-family: var(--font-sans);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .products-header p {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .products-section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-top: var(--spacing-md);
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-card:active {
+            transform: scale(0.98);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--gray-800);
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.625rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 2;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge.bestseller {
+            background: rgba(255, 107, 0, 0.95);
+            color: var(--white);
+        }
+
+        .product-badge.new {
+            background: rgba(183, 136, 232, 0.95);
+            color: var(--white);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--lavender-50) 0%, var(--white) 100%);
+            overflow: hidden;
+        }
+
+        .product-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 0.75rem;
+            transition: transform 0.2s ease;
+        }
+
+        .product-card-content {
+            padding: 0.75rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            text-align: center;
+        }
+
+        .product-card-content a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-card-content a:hover .product-card-title {
+            color: var(--lavender-600);
+        }
+
+        .product-card-title {
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-card-subtitle {
+            font-size: 0.6875rem;
+            color: var(--gray-600);
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-card-description {
+            display: none;
+        }
+
+        .product-card-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: auto;
+        }
+
+        .product-card-price {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .price-current {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .price-original {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-decoration: line-through;
+        }
+
+        .product-card-btn {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, var(--lavender-500) 0%, var(--lavender-600) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .product-card-btn:hover {
+            background: linear-gradient(135deg, var(--lavender-600) 0%, var(--lavender-500) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(155, 109, 217, 0.4);
+        }
+
+        .product-card-btn:active {
+            transform: translateY(0);
+        }
+
+        .product-reviews {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.6875rem;
+        }
+
+        .product-stars {
+            color: #F59E0B;
+            font-size: 0.6875rem;
+            letter-spacing: -0.5px;
+        }
+
+        .product-rating {
+            font-size: 0.6875rem;
+            color: var(--gray-500);
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 0.75rem;
+            }
+
+            .products-header {
+                padding: 6rem 0 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .product-card-content {
+                padding: 0.625rem;
+            }
+
+            .product-card-title {
+                font-size: 0.8125rem;
+            }
+
+            .price-current {
+                font-size: 0.9375rem;
+            }
+        }
+
+        /* Products Filter Menu */
+        .products-filter {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1rem;
+            background: var(--white);
+            border: 2px solid var(--lavender-200);
+            border-radius: var(--radius-md);
+            color: var(--gray-700);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--lavender-400);
+            background: var(--lavender-50);
+            color: var(--lavender-600);
+        }
+
+        .filter-btn.active {
+            background: var(--lavender-500);
+            border-color: var(--lavender-500);
+            color: var(--white);
+        }
+
+        .filter-btn.active svg {
+            stroke: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .products-filter {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8125rem;
+            }
+
+            .filter-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-filter {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                padding-bottom: 0.5rem;
+                margin-bottom: 1.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .filter-btn {
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo" aria-label="Aura Clara Home">
+                    <img src="../assets/images/logo.png" alt="Aura Clara logo" class="logo-img">
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Shop</a>
+                    <a href="../index.html#shop">Best Sellers</a>
+                    <a href="../pages/newsletter.html">Newsletter</a>
+                    <a href="#" id="accountLink">Account</a>
+                </div>
+                <div class="nav-icons">
+                    <a href="#search" class="icon-link" aria-label="Search products">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M14 14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+                            <circle cx="15.5" cy="16.5" r="1.5" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-count" aria-label="Cart items">0</span>
+                    </a>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Header -->
+    <section class="products-header">
+        <div class="container">
+            <h1>Shop All Products</h1>
+            <p>Banish Breakouts. Fade Fine Lines. Reveal Your Best Skin.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <!-- Filter/Category Menu -->
+            <div class="products-filter">
+                <button class="filter-btn active" data-category="all">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>All Products</span>
+                </button>
+                <button class="filter-btn" data-category="patches">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <span>Patches</span>
+                </button>
+                <button class="filter-btn" data-category="tools">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                    <span>Tools</span>
+                </button>
+                <button class="filter-btn" data-category="masks">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span>Masks</span>
+                </button>
+                <button class="filter-btn" data-category="bestsellers">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span>Bestsellers</span>
+                </button>
+            </div>
+
+            <div class="products-grid">
+
+                <!-- Product 1: Clarity Patches -->
+                <div class="product-card" data-category="patches bestsellers" data-product-id="0" data-product-name="Clarity Patches (36ct)" data-product-price="12.99" data-product-image="../assets/images/product-packaging.png">
+                    <span class="product-badge bestseller">Bestseller</span>
+                    <div class="product-image-wrapper">
+                        <img src="../assets/images/product-packaging.png" alt="Clarity Patches" class="product-card-image">
+                    </div>
+                    <div class="product-card-content">
+                        <a href="clarity-patches.html">
+                            <h3 class="product-card-title">Clarity Patches</h3>
+                            <p class="product-card-subtitle">Hydrocolloid Treatment</p>
+                        </a>
+                        <div class="product-card-footer">
+                            <div class="product-card-price">
+                                <span class="price-current">$12.99</span>
+                                <span class="price-original">$19.99</span>
+                            </div>
+                            <div class="product-reviews">
+                                <span class="product-stars">★★★★★</span>
+                                <span class="product-rating">(4.2K)</span>
+                            </div>
+                            <button class="product-card-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2: Face Sculpting Tool -->
+                <div class="product-card" data-category="tools bestsellers" data-product-id="1" data-product-name="Face Sculpting Tool" data-product-price="52.99" data-product-image="../assets/images/face-sculpting-tool-box.png">
+                    <span class="product-badge bestseller">Popular</span>
+                    <div class="product-image-wrapper">
+                        <img src="../assets/images/face-sculpting-tool-box.png" alt="Face Sculpting Tool" class="product-card-image">
+                    </div>
+                    <div class="product-card-content">
+                        <a href="neck-face-sculpting-tool.html">
+                            <h3 class="product-card-title">Face Sculpting Tool</h3>
+                            <p class="product-card-subtitle">LED Therapy</p>
+                        </a>
+                        <div class="product-card-footer">
+                            <div class="product-card-price">
+                                <span class="price-current">$52.99</span>
+                                <span class="price-original">$79.99</span>
+                            </div>
+                            <div class="product-reviews">
+                                <span class="product-stars">★★★★★</span>
+                                <span class="product-rating">(3.1K)</span>
+                            </div>
+                            <button class="product-card-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3: Jawline Shaper -->
+                <div class="product-card" data-category="tools" data-product-id="2" data-product-name="Jawline Shaper Set" data-product-price="12.99" data-product-image="../assets/images/jawline-shaper.jpg">
+                    <span class="product-badge new">New</span>
+                    <div class="product-image-wrapper">
+                        <img src="../assets/images/jawline-shaper.jpg" alt="Jawline Shaper" class="product-card-image">
+                    </div>
+                    <div class="product-card-content">
+                        <a href="jawline-shaper.html">
+                            <h3 class="product-card-title">Jawline Shaper</h3>
+                            <p class="product-card-subtitle">Sculpting Tool</p>
+                        </a>
+                        <div class="product-card-footer">
+                            <div class="product-card-price">
+                                <span class="price-current">$12.99</span>
+                                <span class="price-original">$24.99</span>
+                            </div>
+                            <div class="product-reviews">
+                                <span class="product-stars">★★★★★</span>
+                                <span class="product-rating">(1.8K)</span>
+                            </div>
+                            <button class="product-card-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4: V-Line Lifting Mask -->
+                <div class="product-card" data-category="masks" data-product-id="3" data-product-name="V-Line Lifting Mask" data-product-price="19.00" data-product-image="../assets/images/vline-mask-flat.jpg">
+                    <span class="product-badge new">New</span>
+                    <div class="product-image-wrapper">
+                        <img src="../assets/images/vline-mask-flat.jpg" alt="V-Line Lifting Mask" class="product-card-image">
+                    </div>
+                    <div class="product-card-content">
+                        <a href="vline-lifting-mask.html">
+                            <h3 class="product-card-title">V-Line Lifting Mask</h3>
+                            <p class="product-card-subtitle">Contouring Treatment</p>
+                        </a>
+                        <div class="product-card-footer">
+                            <div class="product-card-price">
+                                <span class="price-current">$19.00</span>
+                                <span class="price-original">$29.99</span>
+                            </div>
+                            <div class="product-reviews">
+                                <span class="product-stars">★★★★★</span>
+                                <span class="product-rating">(2.4K)</span>
+                            </div>
+                            <button class="product-card-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5: Bio-Collagen Mask -->
+                <div class="product-card" data-category="masks" data-product-id="4" data-product-name="Bio-Collagen Mask (4pk)" data-product-price="24.99" data-product-image="../assets/images/bio-collagen-aesthetic.jpg">
+                    <span class="product-badge new">New</span>
+                    <div class="product-image-wrapper">
+                        <img src="../assets/images/bio-collagen-aesthetic.jpg" alt="Bio-Collagen Mask" class="product-card-image">
+                    </div>
+                    <div class="product-card-content">
+                        <a href="bio-collagen-mask.html">
+                            <h3 class="product-card-title">Bio-Collagen Mask</h3>
+                            <p class="product-card-subtitle">Hydrating Treatment</p>
+                        </a>
+                        <div class="product-card-footer">
+                            <div class="product-card-price">
+                                <span class="price-current">$24.99</span>
+                                <span class="price-original">$39.99</span>
+                            </div>
+                            <div class="product-reviews">
+                                <span class="product-stars">★★★★★</span>
+                                <span class="product-rating">(1.9K)</span>
+                            </div>
+                            <button class="product-card-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="section-title">Join Our Circle</h2>
+                <p class="section-description">
+                    Be the first to discover new rituals, exclusive offers, and skincare wisdom
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo.png" alt="Aura Clara - Illuminate Your Beauty" class="footer-logo">
+                    <p class="footer-tagline">Illuminate Your Beauty</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/auraclara" aria-label="Follow Aura Clara on Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="https://tiktok.com/@auraclara" aria-label="Follow Aura Clara on TikTok" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M19 10C17.5 10 16 9.5 15 8.5V16C15 18.5 13 21 10 21C7 21 5 18.5 5 16C5 13.5 7 11 10 11V14C8.5 14 8 15 8 16C8 17 8.5 18 10 18C11.5 18 12 17 12 16V3H15C15 3.5 15.5 7 19 7V10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <a href="clarity-patches.html">Clarity Patches</a>
+                    <a href="neck-face-sculpting-tool.html">Sculpting Tools</a>
+                    <a href="bio-collagen-mask.html">Face Masks</a>
+                    <a href="../index.html#bestsellers">Bestsellers</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Our Philosophy</a>
+                    <a href="#">Ingredients</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Contact</a>
+                    <a href="#">Shipping</a>
+                    <a href="#">Returns</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aura Clara. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-overlay"></div>
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2 class="cart-modal-title">Shopping Cart</h2>
+                <button class="cart-modal-close" aria-label="Close cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="cart-modal-body">
+                <div class="cart-items" id="cartItems">
+                    <!-- Cart items will be inserted here by JavaScript -->
+                </div>
+                <div class="cart-empty" id="cartEmpty">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 10H14L20 40H50L56 20H22"/>
+                        <circle cx="22" cy="52" r="4"/>
+                        <circle cx="48" cy="52" r="4"/>
+                    </svg>
+                    <p>Your cart is empty</p>
+                    <a href="../products/index.html" class="btn btn-primary">Start Shopping</a>
+                </div>
+            </div>
+            <div class="cart-modal-footer">
+                <!-- Bestseller Upsell -->
+                <div class="cart-upsell" id="cartUpsell">
+                    <div class="upsell-header">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L12.5 7L18 8L14 12L15 18L10 15L5 18L6 12L2 8L7.5 7L10 2Z" fill="#F59E0B" stroke="#F59E0B" stroke-width="1.5"/>
+                        </svg>
+                        <span class="upsell-title">Complete Your Routine</span>
+                    </div>
+                    <div class="upsell-product">
+                        <img src="../assets/images/face-sculpting-tool-box.png" alt="Face Sculpting Tool" class="upsell-image">
+                        <div class="upsell-info">
+                            <h4 class="upsell-name">Face Sculpting Tool</h4>
+                            <p class="upsell-desc">Red light therapy for fine lines & collagen</p>
+                            <div class="upsell-pricing">
+                                <span class="upsell-price">$52.99</span>
+                                <span class="upsell-original">$79.99</span>
+                                <span class="upsell-badge">BESTSELLER</span>
+                            </div>
+                        </div>
+                        <button class="btn-upsell-add" id="addUpsellBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Add
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cart-subtotal">
+                    <span>Subtotal:</span>
+                    <span class="cart-subtotal-amount" id="cartSubtotal">$0.00</span>
+                </div>
+                <button class="btn btn-primary btn-checkout" id="checkoutBtn">
+                    Proceed to Checkout
+                </button>
+                <p class="cart-shipping-note">Shipping calculated at checkout</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopify Integration - Inline -->
+    <script>
+console.log('🔥 SHOPIFY SCRIPT STARTING (products page)');
+
+// FORCE DELETE any existing ShopifyClient from other pages
+delete window.ShopifyClient;
+console.log('🧹 Cleared any existing ShopifyClient');
+
+window.shopifyProductMap = {
+    'clarity-patches': 'gid://shopify/ProductVariant/43768004313139',
+    'clarity-patches-36ct': 'gid://shopify/ProductVariant/43768004313139',
+    'face-sculpting-tool': 'gid://shopify/ProductVariant/43768004378675',
+    'jawline-shaper': 'gid://shopify/ProductVariant/43768004411443',
+    'jawline-shaper-set': 'gid://shopify/ProductVariant/43768004411443',
+    'vline-mask': 'gid://shopify/ProductVariant/43768004444211',
+    'v-line-lifting-mask': 'gid://shopify/ProductVariant/43768004444211',
+    'bio-collagen-mask': 'gid://shopify/ProductVariant/43768004542515',
+    'bio-collagen-mask-4pk': 'gid://shopify/ProductVariant/43768004542515',
+    '0': 'gid://shopify/ProductVariant/43768004313139',
+    '1': 'gid://shopify/ProductVariant/43768004378675',
+    '2': 'gid://shopify/ProductVariant/43768004411443',
+    '3': 'gid://shopify/ProductVariant/43768004444211',
+    '4': 'gid://shopify/ProductVariant/43768004542515'
+};
+class ShopifyClient {
+    constructor() {
+        this.shopDomain = 'xq0qhk-h0.myshopify.com';
+        this.storefrontAccessToken = 'ab3dcd93643c1f542ab72cbf500df85a';
+        this.apiVersion = '2024-10';
+        this.endpoint = `https://${this.shopDomain}/api/${this.apiVersion}/graphql.json`;
+        this.pageSource = 'products-page'; // Identify this is from products page
+        console.log('🎯 ShopifyClient initialized from:', this.pageSource);
+    }
+    async query(graphqlQuery, variables = {}) {
+        try {
+            const response = await fetch(this.endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Shopify-Storefront-Access-Token': this.storefrontAccessToken
+                },
+                body: JSON.stringify({ query: graphqlQuery, variables: variables })
+            });
+            const result = await response.json();
+            if (result.errors) {
+                console.error('Shopify GraphQL errors:', result.errors);
+                throw new Error(result.errors[0].message);
+            }
+            return result.data;
+        } catch (error) {
+            console.error('Shopify API error:', error);
+            throw error;
+        }
+    }
+    async createCheckout(lineItems, customerEmail = null) {
+        const query = `
+            mutation cartCreate($input: CartInput!) {
+                cartCreate(input: $input) {
+                    cart {
+                        id
+                        checkoutUrl
+                        lines(first: 50) {
+                            edges {
+                                node {
+                                    id
+                                    quantity
+                                    merchandise {
+                                        ... on ProductVariant {
+                                            id
+                                            title
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        cost {
+                            subtotalAmount {
+                                amount
+                                currencyCode
+                            }
+                            totalAmount {
+                                amount
+                                currencyCode
+                            }
+                        }
+                    }
+                    userErrors {
+                        code
+                        field
+                        message
+                    }
+                }
+            }
+        `;
+        const input = {
+            lines: lineItems.map(item => ({
+                merchandiseId: item.variantId,
+                quantity: item.quantity
+            }))
+        };
+        if (customerEmail) {
+            input.buyerIdentity = { email: customerEmail };
+        }
+        const data = await this.query(query, { input });
+        if (data.cartCreate.userErrors.length > 0) {
+            throw new Error(data.cartCreate.userErrors[0].message);
+        }
+        return {
+            id: data.cartCreate.cart.id,
+            webUrl: data.cartCreate.cart.checkoutUrl
+        };
+    }
+    cartToLineItems(cart) {
+        return cart.map(item => {
+            let variantId = item.shopifyVariantId;
+            if (!variantId && window.shopifyProductMap) {
+                const productSlug = typeof item.count === 'string' ? item.count : String(item.count);
+                variantId = window.shopifyProductMap[productSlug];
+            }
+            if (!variantId) {
+                console.error('Missing Shopify variant ID for item:', item);
+                throw new Error(`Product "${item.name}" is not mapped to Shopify`);
+            }
+            return { variantId: variantId, quantity: item.quantity };
+        });
+    }
+    async checkoutFromCart(cart, customerEmail = null) {
+        try {
+            const lineItems = this.cartToLineItems(cart);
+            const checkout = await this.createCheckout(lineItems, customerEmail);
+            window.location.href = checkout.webUrl;
+            return checkout;
+        } catch (error) {
+            console.error('Checkout error:', error);
+            throw error;
+        }
+    }
+}
+window.ShopifyClient = new ShopifyClient();
+console.log('✨ Shopify initialized (products page) - Type:', typeof window.ShopifyClient);
+    </script>
+
+    <!-- Main Script -->
+    <script src="../js/main.js"></script>
+
+    <!-- Products Page Cart Script -->
+    <script>
+        // Add to cart functionality for product cards
+        document.querySelectorAll('.product-card-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const card = btn.closest('.product-card');
+                const productId = card.dataset.productId;
+                const productName = card.dataset.productName;
+                const productPrice = parseFloat(card.dataset.productPrice);
+                const productImage = card.dataset.productImage;
+
+                // Use the addToCart function from main.js
+                if (typeof addToCart === 'function') {
+                    addToCart(productId, productPrice, productName, productImage);
+
+                    // Visual feedback
+                    btn.textContent = 'Added! ✨';
+                    btn.style.background = '#10B981';
+                    setTimeout(() => {
+                        btn.textContent = 'Add to Cart';
+                        btn.style.background = '';
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+
+    <!-- Filter Script -->
+    <script>
+        // Product filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
+
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter products
+                productCards.forEach(card => {
+                    const cardCategories = card.getAttribute('data-category');
+
+                    if (category === 'all' || cardCategories.includes(category)) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Account Link Handler -->
+    <script>
+    // Handle Account link - check auth before navigating
+    document.addEventListener('DOMContentLoaded', () => {
+        const accountLink = document.getElementById('accountLink');
+
+        if (accountLink) {
+            accountLink.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                try {
+                    // Check if user is logged in
+                    const user = await window.AuraClaraAuth.getCurrentUser();
+
+                    if (user) {
+                        // User is logged in - navigate to account page
+                        window.location.href = '../pages/account.html';
+                    } else {
+                        // User is not logged in - open auth modal
+                        if (window.authModal) {
+                            window.authModal.open();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Account link error:', error);
+                    // If there's an error, open the auth modal
+                    if (window.authModal) {
+                        window.authModal.open();
+                    }
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

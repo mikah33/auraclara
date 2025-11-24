@@ -1,0 +1,232 @@
+/* ========================================
+   AURA CLARA - Auth Modal Styles
+   ======================================== */
+
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.auth-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.auth-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    padding: 2.5rem;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.auth-modal-close:hover {
+    background: var(--lavender-100);
+    color: var(--lavender-600);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+    font-family: var(--font-serif);
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+    color: var(--gray-600);
+    font-size: 0.9375rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.form-group input {
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--lavender-200);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--gray-900);
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--lavender-500);
+    box-shadow: 0 0 0 3px rgba(230, 213, 245, 0.2);
+}
+
+.form-group small {
+    font-size: 0.8125rem;
+    color: var(--gray-500);
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: var(--lavender-600);
+    font-size: 0.875rem;
+    text-decoration: none;
+    cursor: pointer;
+    align-self: flex-start;
+    padding: 0;
+    margin-top: -0.5rem;
+    transition: color 0.2s ease;
+}
+
+.link-button:hover {
+    color: var(--lavender-700);
+    text-decoration: underline;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--lavender-300);
+    color: var(--lavender-600);
+}
+
+.btn-outline:hover {
+    background: var(--lavender-50);
+    border-color: var(--lavender-400);
+    color: var(--lavender-700);
+}
+
+.auth-divider {
+    text-align: center;
+    margin: 0.5rem 0;
+    position: relative;
+}
+
+.auth-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--lavender-200);
+}
+
+.auth-divider span {
+    position: relative;
+    background: var(--white);
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+/* Success Message */
+.auth-message {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.auth-message h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 0.75rem;
+}
+
+.auth-message p {
+    color: var(--gray-600);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Error Message */
+.auth-error {
+    background: #FEE;
+    border: 1px solid #FCC;
+    color: #C33;
+    padding: 0.875rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .auth-modal-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .auth-header h2 {
+        font-size: 1.5rem;
+    }
+}

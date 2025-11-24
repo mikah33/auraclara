@@ -1,0 +1,28 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Circular mask -->
+    <defs>
+        <clipPath id="circle">
+            <circle cx="256" cy="256" r="240"/>
+        </clipPath>
+    </defs>
+
+    <!-- Background circle -->
+    <circle cx="256" cy="256" r="256" fill="#E6D5F5"/>
+
+    <!-- Logo centered and scaled -->
+    <g clip-path="url(#circle)" transform="translate(106, 106) scale(0.6)">
+        <!-- Crescent Moon -->
+        <circle cx="256" cy="256" r="120" fill="#D4AF37" opacity="0.2"/>
+        <path d="M256 136C198.1 136 151 183.1 151 241C151 298.9 198.1 346 256 346C313.9 346 361 298.9 361 241C361 183.1 313.9 136 256 136Z" fill="#D4AF37"/>
+        <path d="M296 136C238.1 136 191 183.1 191 241C191 298.9 238.1 346 296 346" fill="#F4C2C2" opacity="0.8"/>
+
+        <!-- Sun rays -->
+        <line x1="256" y1="80" x2="256" y2="110" stroke="#D4AF37" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+        <line x1="336" y1="96" x2="318" y2="122" stroke="#D4AF37" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+        <line x1="400" y1="160" x2="374" y2="178" stroke="#D4AF37" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+        <line x1="176" y1="96" x2="194" y2="122" stroke="#D4AF37" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+        <line x1="112" y1="160" x2="138" y2="178" stroke="#D4AF37" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+        <line x1="80" y1="241" x2="110" y2="241" stroke="#D4AF37" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+        <line x1="432" y1="241" x2="402" y2="241" stroke="#D4AF37" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+    </g>
+</svg>

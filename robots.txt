@@ -1,0 +1,6 @@
+# Aura Clara - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.auraclara.com/sitemap.xml

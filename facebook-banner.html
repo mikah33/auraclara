@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Clara Facebook Banner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        }
+
+        .banner-container {
+            width: 820px;
+            height: 312px;
+            background: linear-gradient(135deg, #B788E8 0%, #9B6DD9 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Subtle texture overlay */
+        .texture-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        /* Content Layout - centered */
+        .banner-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 60px;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .logo {
+            width: 140px;
+            height: auto;
+            margin-bottom: 24px;
+            filter: brightness(0) invert(1);
+        }
+
+        .banner-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .banner-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* Instructions */
+        .instructions {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #9B6DD9;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h3>📸 Screenshot Instructions</h3>
+        <ol>
+            <li>Press <strong>Cmd + Shift + 4</strong></li>
+            <li>Press <strong>Spacebar</strong></li>
+            <li>Click the banner to capture</li>
+            <li>Upload to Facebook as cover photo</li>
+        </ol>
+        <p style="margin-top: 12px; color: #666;">Banner size: 820px × 312px (perfect for Facebook)</p>
+    </div>
+
+    <div class="banner-container">
+        <!-- Texture overlay -->
+        <div class="texture-overlay"></div>
+
+        <div class="banner-content">
+            <img src="assets/images/logo.png" alt="Aura Clara" class="logo">
+            <h1 class="banner-title">Premium Skincare Tools & Treatments</h1>
+            <p class="banner-subtitle">Reveal your skin's natural radiance</p>
+        </div>
+    </div>
+</body>
+</html>
