@@ -581,6 +581,8 @@ p {
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     position: relative;
     z-index: 10;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Hero Deals Carousel */
