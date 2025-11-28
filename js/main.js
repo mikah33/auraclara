@@ -758,18 +758,19 @@ if (dealCards.length > 0) {
                 const productData = heroDealsProducts[dealIndex];
                 const price = productData.prices[selectedOption];
 
-                // Determine product name based on option
+                // Determine product ID and name based on option
+                let productId = productData.id;
                 let productName = productData.name;
 
                 if (selectedOption === 'bundle') {
+                    productId = productData.id + '-bundle'; // Use bundle variant
                     productName += ' - 3 Pack Bundle (Buy 2 Get 1 FREE)';
                 } else if (selectedOption === 'subscribe') {
                     productName += ' (Subscribe & Save)';
                 }
 
-                // Add to cart - quantity stays at 1 for bundles
-                // The bundle price ($105.98) represents the complete 3-pack bundle
-                addToCart(productData.id, price, productName, productData.image);
+                // Add to cart with correct product ID (bundle or single)
+                addToCart(productId, price, productName, productData.image);
 
                 // Visual feedback
                 const originalText = addToCartBtn.textContent;

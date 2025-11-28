@@ -945,6 +945,7 @@ console.log('🔥 SHOPIFY SCRIPT STARTING TO LOAD');
 
 // Maps your website product IDs to Shopify variant IDs
 window.shopifyProductMap = {
+    // Single Products
     'clarity-patches': 'gid://shopify/ProductVariant/43768004313139',
     'clarity-patches-36ct': 'gid://shopify/ProductVariant/43768004313139',
     'face-sculpting-tool': 'gid://shopify/ProductVariant/43768004378675',
@@ -953,7 +954,14 @@ window.shopifyProductMap = {
     'vline-mask': 'gid://shopify/ProductVariant/43768004444211',
     'v-line-lifting-mask': 'gid://shopify/ProductVariant/43768004444211',
     'bio-collagen-mask': 'gid://shopify/ProductVariant/43768004542515',
-    'bio-collagen-mask-4pk': 'gid://shopify/ProductVariant/43768004542515'
+    'bio-collagen-mask-4pk': 'gid://shopify/ProductVariant/43768004542515',
+
+    // Bundle Products (Buy 2 Get 1 FREE)
+    'clarity-patches-bundle': 'gid://shopify/ProductVariant/43787216683059',
+    'face-sculpting-tool-bundle': 'gid://shopify/ProductVariant/43787216617523',
+    'jawline-shaper-bundle': 'gid://shopify/ProductVariant/43787216584755',
+    'vline-mask-bundle': 'gid://shopify/ProductVariant/43787216420915',
+    'bio-collagen-mask-bundle': 'gid://shopify/ProductVariant/43787216060467'
 };
 
 console.log('✨ Shopify product mapping loaded');
