@@ -21,13 +21,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/product-page.css">
+    <link rel="stylesheet" href="../css/recommended-products.css">
 </head>
 <body>
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <p>🔥 BLACK FRIDAY SALE | Use code <strong>BLACKFRI25</strong> for 25% off</p>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar navbar-product">
         <div class="container">
@@ -234,6 +230,12 @@
             </div>
         </section>
 
+        <!-- Recommended Products Section -->
+        <section class="recommended-products-section">
+            <h2>You May Also Like</h2>
+            <div id="recommended-products-carousel"></div>
+        </section>
+
         <!-- Features Section -->
         <section class="features-section">
             <h2 class="section-title-sm">Why You'll Love It</h2>
@@ -432,62 +434,51 @@
         </div>
     </footer>
 
+    <!-- Shopify Integration -->
     <script>
-        // Change product image
-        function changeProductImage(thumb) {
-            const mainImg = document.getElementById('main-product-img');
-            mainImg.src = thumb.src;
+        window.shopifyProductMap = {
+            'face-sculpting-tool': 'gid://shopify/ProductVariant/43768004378675',
+            'face-sculpting-tool-bundle': 'gid://shopify/ProductVariant/43787216617523'
+        };
+    </script>
+    <script src="../js/product-cart.js"></script>
+    <script src="../js/product-recommendations.js"></script>
 
-            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-            thumb.classList.add('active');
-        }
+    <script>
+        // Initialize recommended products carousel
+        initRecommendedProducts('face-sculpting-tool');
+    </script>
 
-        // Toggle FAQ
-        function toggleFaq(button) {
-            const item = button.parentElement;
-            const isOpen = item.classList.contains('open');
+    <script>
+        // Add to Cart Button Handlers - Face Sculpting Tool
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn-add-to-cart, .btn-sticky-cart, .btn-cta-final').forEach(button => {
+                button.addEventListener('click', () => {
+                    const selectedOption = document.querySelector('input[name="purchase-type"]:checked');
+                    const pricingOption = selectedOption.closest('.pricing-option');
+                    const optionType = pricingOption.dataset.option;
+                    const price = parseFloat(pricingOption.dataset.price);
 
-            // Close all
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                    let productId = 'face-sculpting-tool';
+                    let productName = 'Face Sculpting Tool';
 
-            // Open clicked if was closed
-            if (!isOpen) {
-                item.classList.add('open');
-            }
-        }
+                    if (optionType === 'bundle') {
+                        productId = 'face-sculpting-tool-bundle';
+                        productName = 'Face Sculpting Tool (3-Pack) - Buy 2 Get 1 FREE';
+                    }
 
-        // Pricing option selection
-        document.querySelectorAll('.pricing-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const radio = this.querySelector('input[type="radio"]');
-                radio.checked = true;
+                    addToCart(productId, price, productName, '../assets/images/face-sculpting-tool-box.png');
 
-                document.querySelectorAll('.pricing-option').forEach(o => o.classList.remove('selected'));
-                this.classList.add('selected');
-
-                // Update button price
-                const price = this.querySelector('.price-current').textContent;
-                document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
-                    btn.querySelector('span') ? btn.querySelector('span').textContent = `Add to Cart - ${price}` : btn.textContent = `Add to Cart - ${price}`;
+                    button.textContent = 'Added! ✨';
+                    button.style.background = '#10B981';
+                    setTimeout(() => {
+                        const currentPrice = document.querySelector('.pricing-option.selected .price-current').textContent;
+                        button.textContent = `Add to Cart - ${currentPrice}`;
+                        button.style.background = '';
+                    }, 2000);
                 });
             });
         });
-
-        // Mobile sticky CTA visibility
-        const stickyCtA = document.querySelector('.mobile-sticky-cta');
-        const heroSection = document.querySelector('.product-hero');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    stickyCtA.classList.remove('visible');
-                } else {
-                    stickyCtA.classList.add('visible');
-                }
-            });
-        }, { threshold: 0 });
-
-        if (heroSection) observer.observe(heroSection);
     </script>
 </body>
 </html>

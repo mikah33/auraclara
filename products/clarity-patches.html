@@ -22,13 +22,9 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/product-page.css">
     <link rel="stylesheet" href="../css/components/sustainability-badges.css">
+    <link rel="stylesheet" href="../css/recommended-products.css">
 </head>
 <body data-product-id="clarity-patches">
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <p>🔥 BLACK FRIDAY SALE | Use code <strong>BLACKFRI25</strong> for 25% off</p>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar navbar-product">
         <div class="container">
@@ -315,6 +311,12 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Recommended Products Section -->
+        <section class="recommended-products-section">
+            <h2>You May Also Like</h2>
+            <div id="recommended-products-carousel"></div>
         </section>
 
         <!-- Features Section -->
@@ -610,6 +612,12 @@
     </footer>
 
     <script>
+        // Shopify Product Mapping
+        window.shopifyProductMap = {
+            'clarity-patches': 'gid://shopify/ProductVariant/43768004313139',
+            'clarity-patches-bundle': 'gid://shopify/ProductVariant/43787216683059'
+        };
+
         // Cart Management
         class ShoppingCart {
             constructor() {
@@ -828,9 +836,16 @@
                 actualShipQuantity = subscriptionQuantity >= 2 ? subscriptionQuantity + 1 : subscriptionQuantity;
             }
 
+            // Determine product ID for Shopify (bundle vs single)
+            let productId = 'clarity-patches';
+            if (optionType === 'bundle') {
+                productId = 'clarity-patches-bundle';
+            }
+
             // Create cart item
             const item = {
                 id: 'clarity-patches',
+                count: productId, // Used for Shopify variant lookup
                 name: 'Clarity Patches',
                 option: title,
                 optionType: optionType,
@@ -839,7 +854,8 @@
                 frequency: frequency,
                 quantity: quantity,
                 actualShipQuantity: actualShipQuantity, // The actual number of packs they receive
-                image: document.getElementById('main-product-img').src
+                image: document.getElementById('main-product-img').src,
+                shopifyVariantId: window.shopifyProductMap?.[productId] || null
             };
 
             // Add to cart
@@ -850,6 +866,13 @@
         document.querySelectorAll('.btn-add-to-cart, .btn-sticky-cart').forEach(button => {
             button.addEventListener('click', addToCart);
         });
+    </script>
+
+    <!-- Recommended Products Carousel -->
+    <script src="../js/product-recommendations.js"></script>
+    <script>
+        // Initialize recommended products carousel
+        initRecommendedProducts('clarity-patches');
     </script>
 
     <!-- Recently Viewed & Recommendations -->

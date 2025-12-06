@@ -920,4 +920,16 @@ document.querySelectorAll('.ios-product-card').forEach(card => {
     });
 });
 
+// Check if URL has #cart hash and open cart modal
+if (window.location.hash === '#cart') {
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => openCartModal(), 100);
+        });
+    } else {
+        setTimeout(() => openCartModal(), 100);
+    }
+}
+
 console.log('✨ Aura Clara website loaded successfully');

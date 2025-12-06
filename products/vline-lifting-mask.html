@@ -21,13 +21,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/product-page.css">
+    <link rel="stylesheet" href="../css/recommended-products.css">
 </head>
 <body>
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <p>🔥 BLACK FRIDAY SALE | Use code <strong>BLACKFRI25</strong> for 25% off</p>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar navbar-product">
         <div class="container">
@@ -259,6 +255,12 @@
             </div>
         </section>
 
+        <!-- Recommended Products Section -->
+        <section class="recommended-products-section">
+            <h2>You May Also Like</h2>
+            <div id="recommended-products-carousel"></div>
+        </section>
+
         <!-- Features Section -->
         <section class="features-section">
             <h2 class="section-title-sm">Why You'll Love It</h2>
@@ -479,37 +481,56 @@
             }
         }
 
-        // Pricing option selection
-        document.querySelectorAll('.pricing-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const radio = this.querySelector('input[type="radio"]');
-                radio.checked = true;
+        // Pricing option selection - moved to product-cart.js
+    </script>
 
-                document.querySelectorAll('.pricing-option').forEach(o => o.classList.remove('selected'));
-                this.classList.add('selected');
+    <!-- Shopify Integration -->
+    <script>
+        window.shopifyProductMap = {
+            'vline-mask': 'gid://shopify/ProductVariant/43768004444211',
+            'vline-mask-bundle': 'gid://shopify/ProductVariant/43787216420915'
+        };
+    </script>
+    <script src="../js/product-cart.js"></script>
+    <script src="../js/product-recommendations.js"></script>
 
-                const price = this.querySelector('.price-current').textContent;
-                document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
-                    btn.querySelector('span') ? btn.querySelector('span').textContent = `Add to Cart - ${price}` : btn.textContent = `Add to Cart - ${price}`;
+    <script>
+        // Initialize recommended products carousel
+        initRecommendedProducts('vline-mask');
+    </script>
+
+    <script>
+        // Add to Cart Button Handlers - V-Line Mask
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn-add-to-cart, .btn-sticky-cart, .btn-cta-final').forEach(button => {
+                button.addEventListener('click', () => {
+                    const selectedOption = document.querySelector('input[name="purchase-type"]:checked');
+                    const pricingOption = selectedOption.closest('.pricing-option');
+                    const optionType = pricingOption.dataset.option;
+                    const price = parseFloat(pricingOption.dataset.price);
+
+                    let productId = 'vline-mask';
+                    let productName = 'V-Line Lifting Mask';
+
+                    if (optionType === 'bundle') {
+                        productId = 'vline-mask-bundle';
+                        productName = 'V-Line Lifting Mask (3-Pack) - Buy 2 Get 1 FREE';
+                    } else if (optionType === 'subscribe') {
+                        productName = 'V-Line Lifting Mask - Subscribe & Save';
+                    }
+
+                    addToCart(productId, price, productName, '../assets/images/vline-mask-flat.jpg');
+
+                    button.textContent = 'Added! ✨';
+                    button.style.background = '#10B981';
+                    setTimeout(() => {
+                        const currentPrice = document.querySelector('.pricing-option.selected .price-current').textContent;
+                        button.textContent = `Add to Cart - ${currentPrice}`;
+                        button.style.background = '';
+                    }, 2000);
                 });
             });
         });
-
-        // Mobile sticky CTA visibility
-        const stickyCtA = document.querySelector('.mobile-sticky-cta');
-        const heroSection = document.querySelector('.product-hero');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    stickyCtA.classList.remove('visible');
-                } else {
-                    stickyCtA.classList.add('visible');
-                }
-            });
-        }, { threshold: 0 });
-
-        if (heroSection) observer.observe(heroSection);
     </script>
 </body>
 </html>

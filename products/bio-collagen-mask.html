@@ -21,13 +21,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/product-page.css">
+    <link rel="stylesheet" href="../css/recommended-products.css">
 </head>
 <body>
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <p>🔥 BLACK FRIDAY SALE | Use code <strong>BLACKFRI25</strong> for 25% off</p>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar navbar-product">
         <div class="container">
@@ -261,6 +257,14 @@
             </div>
         </section>
 
+        <!-- Recommended Products Carousel -->
+        <section class="recommended-products-section">
+            <div class="container">
+                <h2>You May Also Love</h2>
+                <div id="recommended-products-carousel"></div>
+            </div>
+        </section>
+
         <!-- Features Section -->
         <section class="features-section">
             <h2 class="section-title-sm">Why You'll Love It</h2>
@@ -459,12 +463,120 @@
         </div>
     </footer>
 
+    <!-- Shopify Integration -->
     <script>
+        // Shopify Product Mapping
+        window.shopifyProductMap = {
+            'bio-collagen-mask': 'gid://shopify/ProductVariant/43768004542515',
+            'bio-collagen-mask-4pk': 'gid://shopify/ProductVariant/43768004542515',
+            'bio-collagen-mask-bundle': 'gid://shopify/ProductVariant/43787216060467'
+        };
+    </script>
+    <script src="../js/product-cart.js"></script>
+    <script src="../js/product-recommendations.js"></script>
+    <script>
+        // Initialize recommended products
+        initRecommendedProducts('bio-collagen-mask');
+
+        // Shopify Client
+        class ShopifyClient {
+            constructor() {
+                this.shopDomain = 'xq0qhk-h0.myshopify.com';
+                this.storefrontAccessToken = 'ab3dcd93643c1f542ab72cbf500df85a';
+                this.apiVersion = '2024-10';
+                this.endpoint = `https://${this.shopDomain}/api/${this.apiVersion}/graphql.json`;
+            }
+
+            async query(graphqlQuery, variables = {}) {
+                try {
+                    const response = await fetch(this.endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Shopify-Storefront-Access-Token': this.storefrontAccessToken
+                        },
+                        body: JSON.stringify({ query: graphqlQuery, variables: variables })
+                    });
+                    const result = await response.json();
+                    if (result.errors) throw new Error(result.errors[0].message);
+                    return result.data;
+                } catch (error) {
+                    console.error('Shopify API error:', error);
+                    throw error;
+                }
+            }
+
+            async createCheckout(lineItems) {
+                const query = `
+                    mutation cartCreate($input: CartInput!) {
+                        cartCreate(input: $input) {
+                            cart {
+                                id
+                                checkoutUrl
+                            }
+                            userErrors { message }
+                        }
+                    }
+                `;
+                const input = {
+                    lines: lineItems.map(item => ({
+                        merchandiseId: item.variantId,
+                        quantity: item.quantity
+                    }))
+                };
+                const data = await this.query(query, { input });
+                if (data.cartCreate.userErrors.length > 0) {
+                    throw new Error(data.cartCreate.userErrors[0].message);
+                }
+                return { id: data.cartCreate.cart.id, webUrl: data.cartCreate.cart.checkoutUrl };
+            }
+        }
+
+        window.ShopifyClient = new ShopifyClient();
+    </script>
+
+    <script>
+        // Shopping Cart Storage
+        let cart = JSON.parse(localStorage.getItem('auraClara_cart')) || [];
+
+        // Add to Cart Function
+        function addToCart(productId, price, name, image) {
+            const shopifyVariantId = window.shopifyProductMap?.[productId] || null;
+            const existingItem = cart.find(item => item.count === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    count: productId,
+                    price: price,
+                    name: name,
+                    image: image,
+                    quantity: 1,
+                    shopifyVariantId: shopifyVariantId
+                });
+            }
+
+            localStorage.setItem('auraClara_cart', JSON.stringify(cart));
+            updateCartCount();
+            return cart;
+        }
+
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        // Initialize cart count
+        updateCartCount();
+
         // Change product image
         function changeProductImage(thumb) {
             const mainImg = document.getElementById('main-product-img');
             mainImg.src = thumb.src;
-
             document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
         }
@@ -473,11 +585,7 @@
         function toggleFaq(button) {
             const item = button.parentElement;
             const isOpen = item.classList.contains('open');
-
-            // Close all
             document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-
-            // Open clicked if was closed
             if (!isOpen) {
                 item.classList.add('open');
             }
@@ -488,15 +596,52 @@
             option.addEventListener('click', function() {
                 const radio = this.querySelector('input[type="radio"]');
                 radio.checked = true;
-
                 document.querySelectorAll('.pricing-option').forEach(o => o.classList.remove('selected'));
                 this.classList.add('selected');
 
                 // Update button price
                 const price = this.querySelector('.price-current').textContent;
-                document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
-                    btn.querySelector('span') ? btn.querySelector('span').textContent = `Add to Cart - ${price}` : btn.textContent = `Add to Cart - ${price}`;
+                document.querySelectorAll('.btn-add-to-cart, .btn-sticky-cart').forEach(btn => {
+                    if (btn.querySelector('span')) {
+                        btn.querySelector('span').textContent = `Add to Cart - ${price}`;
+                    } else {
+                        btn.textContent = `Add to Cart - ${price}`;
+                    }
                 });
+            });
+        });
+
+        // Add to Cart Button Handlers
+        document.querySelectorAll('.btn-add-to-cart, .btn-sticky-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                // Get selected pricing option
+                const selectedOption = document.querySelector('input[name="purchase-type"]:checked');
+                const pricingOption = selectedOption.closest('.pricing-option');
+                const optionType = pricingOption.dataset.option;
+                const price = parseFloat(pricingOption.dataset.price);
+
+                // Determine product ID and name
+                let productId = 'bio-collagen-mask';
+                let productName = 'Bio-Collagen Mask (4pk)';
+
+                if (optionType === 'bundle') {
+                    productId = 'bio-collagen-mask-bundle';
+                    productName = 'Bio-Collagen Mask (12pk) - Buy 2 Get 1 FREE';
+                } else if (optionType === 'subscribe') {
+                    productName = 'Bio-Collagen Mask (4pk) - Subscribe & Save';
+                }
+
+                // Add to cart
+                addToCart(productId, price, productName, '../assets/images/bio-collagen-aesthetic.jpg');
+
+                // Visual feedback
+                button.textContent = 'Added! ✨';
+                button.style.background = '#10B981';
+                setTimeout(() => {
+                    const currentPrice = document.querySelector('.pricing-option.selected .price-current').textContent;
+                    button.textContent = `Add to Cart - ${currentPrice}`;
+                    button.style.background = '';
+                }, 2000);
             });
         });
 
