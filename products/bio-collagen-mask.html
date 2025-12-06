@@ -32,7 +32,7 @@
                     <img src="../assets/images/logo.png" alt="Aura Clara" class="logo-img">
                 </a>
                 <div class="nav-icons">
-                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                    <a href="../index.html#cart" class="icon-link" aria-label="Shopping cart">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
@@ -134,7 +134,8 @@
                     </div>
 
                     <!-- Buy 2 Get 1 Free -->
-                    <div class="pricing-option" data-option="bundle" data-price="49.98">
+                    <div class="pricing-option pricing-option-recommended" data-option="bundle" data-price="49.98">
+                        <div class="recommended-badge">BUY 2 GET 1 FREE - BEST VALUE</div>
                         <div class="option-header">
                             <input type="radio" name="purchase-type" id="bundle">
                             <label for="bundle">
@@ -156,48 +157,13 @@
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                     <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
+                                <span><strong>FREE SHIPPING</strong> included</span>
+                            </div>
+                            <div class="sub-benefit">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <span>3-month supply (1x/week)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Subscribe & Save -->
-                    <div class="pricing-option pricing-option-recommended" data-option="subscribe" data-price="19.99">
-                        <div class="recommended-badge">SUBSCRIBE & SAVE 20% - BEST VALUE</div>
-                        <div class="option-header">
-                            <input type="radio" name="purchase-type" id="subscribe">
-                            <label for="subscribe">
-                                <span class="option-title">Subscribe & Save (4 Masks)</span>
-                            </label>
-                        </div>
-                        <div class="option-price">
-                            <span class="price-current">$19.99</span>
-                            <span class="price-original">$24.99</span>
-                        </div>
-                        <div class="bundle-benefits">
-                            <div class="sub-benefit">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span><strong>SAVE 20%</strong> on every order</span>
-                            </div>
-                            <div class="sub-benefit">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span><strong>FREE SHIPPING</strong> always</span>
-                            </div>
-                            <div class="sub-benefit">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span>Delivery every 30 days</span>
-                            </div>
-                            <div class="sub-benefit">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span>Cancel anytime</span>
                             </div>
                         </div>
                     </div>
@@ -627,8 +593,6 @@
                 if (optionType === 'bundle') {
                     productId = 'bio-collagen-mask-bundle';
                     productName = 'Bio-Collagen Mask (12pk) - Buy 2 Get 1 FREE';
-                } else if (optionType === 'subscribe') {
-                    productName = 'Bio-Collagen Mask (4pk) - Subscribe & Save';
                 }
 
                 // Add to cart

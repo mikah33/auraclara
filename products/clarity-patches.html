@@ -33,7 +33,7 @@
                     <img src="../assets/images/logo.png" alt="Aura Clara" class="logo-img">
                 </a>
                 <div class="nav-icons">
-                    <a href="#cart" class="icon-link" aria-label="Shopping cart">
+                    <a href="../index.html#cart" class="icon-link" aria-label="Shopping cart">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M3 3H4.5L6.5 13H16L18 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
@@ -156,7 +156,8 @@
                     </div>
 
                     <!-- Buy 2 Get 1 Free -->
-                    <div class="pricing-option" data-option="bundle" data-price="25.98">
+                    <div class="pricing-option pricing-option-recommended" data-option="bundle" data-price="25.98">
+                        <div class="recommended-badge">BUY 2 GET 1 FREE - BEST VALUE</div>
                         <div class="option-header">
                             <input type="radio" name="purchase-type" id="bundle">
                             <label for="bundle">
@@ -178,82 +179,19 @@
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                     <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <span><strong>FREE SHIPPING</strong></span>
+                                <span><strong>FREE SHIPPING</strong> included</span>
                             </div>
                             <div class="sub-benefit">
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                     <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <span>3-month supply</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Subscribe & Save -->
-                    <div class="pricing-option pricing-option-recommended" data-option="subscribe" data-price="10.99" data-base-price="10.99">
-                        <div class="recommended-badge">SUBSCRIBE & SAVE 20% - BEST VALUE</div>
-                        <div class="option-header">
-                            <input type="radio" name="purchase-type" id="subscribe">
-                            <label for="subscribe">
-                                <span class="option-title">Subscribe & Save (36 Patches)</span>
-                            </label>
-                        </div>
-                        <div class="option-price">
-                            <span class="price-current">$10.99</span>
-                            <span class="price-original">$12.99</span>
-                        </div>
-                        <div class="bundle-benefits">
-                            <div class="sub-benefit">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span><strong>SAVE 20%</strong> on every order</span>
+                                <span>Perfect for stocking up</span>
                             </div>
                             <div class="sub-benefit">
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                     <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <span>Skip, delay or cancel any time</span>
-                            </div>
-                            <div class="sub-benefit">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span><strong>FREE SHIPPING</strong> always</span>
-                            </div>
-                            <div class="sub-benefit">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M10 3L4.5 9L2 6.5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span>Renew on your timeframe</span>
-                            </div>
-                        </div>
-
-                        <!-- Quantity Selector -->
-                        <div class="delivery-frequency">
-                            <label class="frequency-label">Quantity per delivery:</label>
-                            <div class="quantity-selector">
-                                <button type="button" class="quantity-btn quantity-minus" data-action="decrease">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M4 8H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                                <span class="quantity-value">1</span>
-                                <button type="button" class="quantity-btn quantity-plus" data-action="increase">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 4V12M4 8H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Delivery Frequency Selector -->
-                        <div class="delivery-frequency">
-                            <label class="frequency-label">Delivery every:</label>
-                            <div class="frequency-buttons">
-                                <button type="button" class="frequency-btn active" data-weeks="4">4 WEEKS</button>
-                                <button type="button" class="frequency-btn" data-weeks="8">8 WEEKS</button>
-                                <button type="button" class="frequency-btn" data-weeks="12">12 WEEKS</button>
+                                <span>Only $8.66 per pack</span>
                             </div>
                         </div>
                     </div>
@@ -728,64 +666,6 @@
             });
         });
 
-        // Delivery frequency selector
-        document.querySelectorAll('.frequency-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering parent pricing option click
-
-                document.querySelectorAll('.frequency-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-
-                const weeks = this.getAttribute('data-weeks');
-                console.log(`Delivery frequency set to ${weeks} weeks`);
-            });
-        });
-
-        // Quantity selector
-        let subscriptionQuantity = 1;
-        const quantityValue = document.querySelector('.quantity-value');
-        const subscribeOption = document.querySelector('[data-option="subscribe"]');
-        const basePrice = parseFloat(subscribeOption.getAttribute('data-base-price'));
-
-        document.querySelectorAll('.quantity-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering parent pricing option click
-
-                const action = this.getAttribute('data-action');
-
-                if (action === 'increase') {
-                    subscriptionQuantity++;
-                } else if (action === 'decrease' && subscriptionQuantity > 1) {
-                    subscriptionQuantity--;
-                }
-
-                // Calculate price and shipping quantity
-                // If they order 2+, they always get 1 free bonus pack
-                let actualQuantity = subscriptionQuantity;
-                let displayQuantity = subscriptionQuantity;
-
-                // If ordering 2 or more, they get 1 free
-                if (subscriptionQuantity >= 2) {
-                    displayQuantity = subscriptionQuantity + 1; // Add 1 free pack
-                    quantityValue.textContent = `${displayQuantity} (${subscriptionQuantity} + 1 Free)`;
-                } else {
-                    quantityValue.textContent = subscriptionQuantity;
-                }
-
-                const newPrice = (basePrice * actualQuantity).toFixed(2);
-                subscribeOption.setAttribute('data-price', newPrice);
-                subscribeOption.querySelector('.price-current').textContent = `$${newPrice}`;
-
-                // Update button if this option is selected
-                const radio = subscribeOption.querySelector('input[type="radio"]');
-                if (radio.checked) {
-                    document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
-                        btn.querySelector('span') ? btn.querySelector('span').textContent = `Add to Cart - $${newPrice}` : btn.textContent = `Add to Cart - $${newPrice}`;
-                    });
-                }
-            });
-        });
-
         // Toggle detail accordion
         function toggleDetail(button) {
             const accordion = button.parentElement;
@@ -820,40 +700,25 @@
             const priceDisplay = pricingOption.querySelector('.price-current').textContent;
             const title = pricingOption.querySelector('.option-title').textContent;
 
-            // Get delivery frequency if subscribe option is selected
-            let frequency = null;
-            if (optionType === 'subscribe') {
-                const activeFrequency = document.querySelector('.frequency-btn.active');
-                frequency = activeFrequency ? activeFrequency.getAttribute('data-weeks') + ' weeks' : '4 weeks';
-            }
-
-            // Get quantity if subscribe option is selected
-            // If they ordered 2+, they get 1 free (so 2 becomes 3, 3 becomes 4, etc.)
-            let quantity = 1;
-            let actualShipQuantity = 1;
-            if (optionType === 'subscribe') {
-                quantity = subscriptionQuantity;
-                actualShipQuantity = subscriptionQuantity >= 2 ? subscriptionQuantity + 1 : subscriptionQuantity;
-            }
-
             // Determine product ID for Shopify (bundle vs single)
             let productId = 'clarity-patches';
+            let productName = 'Clarity Patches (36 Patches)';
+
             if (optionType === 'bundle') {
                 productId = 'clarity-patches-bundle';
+                productName = 'Clarity Patches (108 Patches) - Buy 2 Get 1 FREE';
             }
 
             // Create cart item
             const item = {
                 id: 'clarity-patches',
                 count: productId, // Used for Shopify variant lookup
-                name: 'Clarity Patches',
+                name: productName,
                 option: title,
                 optionType: optionType,
                 price: parseFloat(price),
                 priceDisplay: priceDisplay,
-                frequency: frequency,
-                quantity: quantity,
-                actualShipQuantity: actualShipQuantity, // The actual number of packs they receive
+                quantity: 1,
                 image: document.getElementById('main-product-img').src,
                 shopifyVariantId: window.shopifyProductMap?.[productId] || null
             };
